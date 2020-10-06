@@ -1,4 +1,4 @@
-import { LightningElement, wire } from 'lwc';
+import { LightningElement, wire, track } from 'lwc';
 import checkOrderExistence from '@salesforce/apex/DishOrderController.checkOrderExistence';
 import getOrder from '@salesforce/apex/DishOrderController.getOrder';
 
@@ -10,17 +10,15 @@ export default class CurrentOrder extends LightningElement {
   @wire(MessageContext)
   messageContext;
 
+  isDetailsModalOpen = false;
+
   order;
   error;
-  orderItems;
+  orderItems = [];
 
   connectedCallback() {
-    this.orderItems = [];
-
-    console.log('started 7.1');
     checkOrderExistence()
       .then(result => {
-        console.log('started 7.2');
         this.loadOrder();
       })
       .catch(error => {
@@ -28,6 +26,14 @@ export default class CurrentOrder extends LightningElement {
         console.log(error);
       });
     this.subscribeToMessageChannel();
+  }
+
+  get totalPrice() {
+    let sum = 0;
+    this.orderItems.forEach((orderItem) => {
+      sum += +orderItem.fields.Item_Price__c.value;
+    });
+    return sum;
   }
 
   loadOrder() {
@@ -60,9 +66,7 @@ export default class CurrentOrder extends LightningElement {
 
   handleMessage(message) {
     const orderItem = message.orderItem;
-    console.log(orderItem);
     this.orderItems.push(orderItem);
-    console.log('12');
   }
 
   unsubscribeMessageChannel() {
@@ -73,5 +77,14 @@ export default class CurrentOrder extends LightningElement {
   disconnectedCallback() {
     this.unsubscribeToMessageChannel();
   } 
+
+  openDetailsModal() {
+    console.log(this.orderItems);
+    this.isDetailsModalOpen = true;
+  }
+
+  closeDetailsModal() {
+    this.isDetailsModalOpen = false;
+  }
 
 }

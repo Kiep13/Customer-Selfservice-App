@@ -86,9 +86,7 @@ export default class AddOredItem extends LightningElement {
     const message = {
         orderItem
     };
-    console.log('10');
     publish(this.messageContext, MESSAGE_CHANNEL, message);
-    console.log('11');
   }
 
   showToast(title, message, variant) {

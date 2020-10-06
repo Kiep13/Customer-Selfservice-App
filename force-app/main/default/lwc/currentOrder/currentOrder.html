@@ -3,10 +3,14 @@
     variant="narrow"
     icon-name="standard:opportunity">
     <h1 slot="title">Current order</h1>
-    <p class="slds-var-p-horizontal_small">Order price: $23.2</p>
+    <p class="slds-var-p-horizontal_small">Order price: {totalPrice}$</p>
     <div class="slds-text-align_center modal_buttons">
-      <button class="slds-button slds-button_neutral" title="Order details">Order details</button>
+      <button class="slds-button slds-button_neutral" title="Order details" onclick={openDetailsModal}>Order details</button>
       <button class="slds-button slds-button_brand" title="Make an order">Make an order</button>
     </div>
   </lightning-card>
+
+  <template if:true={isDetailsModalOpen}>
+    <c-order-details items={orderItems} onclosemodal={closeDetailsModal}></c-order-details>
+  </template>
 </template>
