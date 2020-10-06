@@ -1,0 +1,4 @@
+article {
+  border: var(--lwc-borderWidthThin, 1px) solid gray;
+  padding: 10px;
+}

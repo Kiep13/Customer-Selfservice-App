@@ -1,0 +1,46 @@
+<template>		
+  <article class="slds-card card" style=" border: 1px solid rgb(153, 153, 153);">
+    <div class="slds-card__header slds-grid">
+      <header class="slds-media slds-media_center slds-has-flexi-truncate">
+        <div class="slds-media__figure">
+          <span class="slds-assistive-text">{dish.Title__c}</span>
+        </div>
+        <div class="slds-media__body">
+          <span>{dish.Title__c}</span>
+        </div>
+      </header>
+    </div>
+    
+    <div class="slds-media">
+      <div class="slds-media__body">
+        <template if:true={dish.Description__c}>
+          <p class="slds-var-m-bottom_xx-small">Description: {dish.Description__c}</p>
+        </template>
+        <p class="slds-var-m-bottom_xx-small">Price {dish.Price__c}</p>
+      </div>
+    </div>
+
+    <footer class="slds-card__footer">
+      <button class="slds-button slds-button_neutral" onclick={handleClick}>Add to order</button>
+    </footer>
+  </article>
+  
+<!-- 
+  <div title={dish.Title__c} class="slds-media_responsive slds-card">
+    <div class="slds-var-p-horizontal_small">
+
+      <div class="slds-media">
+        <div class="slds-media__body">
+          <template if:true={dish.Description__c}>
+            <p class="slds-var-m-bottom_xx-small">Description: {dish.Description__c}</p>
+          </template>
+          <p class="slds-var-m-bottom_xx-small">Price {dish.Price__c}</p>
+        </div>
+        <div>
+          <button class="slds-button slds-button_neutral" onclick={handleClick}>Add to order</button>
+        </div>
+      </div>
+
+    </div>
+  </div> -->
+</template>

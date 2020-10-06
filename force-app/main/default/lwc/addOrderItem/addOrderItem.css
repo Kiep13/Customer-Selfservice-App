@@ -1,0 +1,15 @@
+.modal_content {
+  background: white;
+}
+
+.modal_form {
+  margin: 20px;
+}
+
+.modal_form lightning-input {
+  margin-top: 10px;
+}
+
+.modal_buttons {
+  margin-top: 15px;
+}

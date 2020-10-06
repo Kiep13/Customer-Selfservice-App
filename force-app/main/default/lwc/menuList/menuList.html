@@ -1,0 +1,28 @@
+<template>
+
+  <lightning-card title="Menu" icon-name="utility:food_and_drink">
+		<div class="slds-card__body_inner">
+
+			<template if:true={dishes}>
+				<lightning-layout multiple-rows="true" pull-to-boundary="small">
+					<template for:each={dishes} for:item="dish">
+            <lightning-layout-item key={dish.Id}  size="4" class="slds-var-p-around_x-small">
+              <c-menu-tile dish={dish} onchoosed={handleChoose}></c-menu-tile>
+            </lightning-layout-item>
+					</template>
+				</lightning-layout>
+      </template>
+      
+			<template if:true={error}>
+				<div class="slds-text-color_error">
+					An error occurred while loading the menu
+				</div>
+			</template>
+		</div>
+  </lightning-card>   
+
+  <template if:true={isModalOpen}>
+    <c-add-order-item dishid={dishId} onclosemodal={closeModal}></c-add-order-item>
+  </template>
+  
+</template>
