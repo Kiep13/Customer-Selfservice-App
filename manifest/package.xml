@@ -44,5 +44,9 @@
        <members>*</members>
        <name>LightningMessageChannel</name>
     </types>
+    <types>
+       <members>*</members>
+       <name>GlobalPicklist</name>
+    </types>
     <version>49.0</version>
 </Package>

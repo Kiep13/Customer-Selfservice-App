@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Bakery</fullName>
+        <default>false</default>
+        <label>Bakery</label>
+    </customValue>
+    <customValue>
+        <fullName>Garnishes</fullName>
+        <default>false</default>
+        <label>Garnishes</label>
+    </customValue>
+    <customValue>
+        <fullName>Main course</fullName>
+        <default>false</default>
+        <label>Main course</label>
+    </customValue>
+    <customValue>
+        <fullName>Desserts</fullName>
+        <default>false</default>
+        <label>Desserts</label>
+    </customValue>
+    <customValue>
+        <fullName>Snacks</fullName>
+        <default>false</default>
+        <label>Snacks</label>
+    </customValue>
+    <customValue>
+        <fullName>Meaty</fullName>
+        <default>false</default>
+        <label>Meaty</label>
+    </customValue>
+    <customValue>
+        <fullName>Vegetable</fullName>
+        <default>false</default>
+        <label>Vegetable</label>
+    </customValue>
+    <customValue>
+        <fullName>Fish</fullName>
+        <default>false</default>
+        <label>Fish</label>
+    </customValue>
+    <customValue>
+        <fullName>Soups</fullName>
+        <default>false</default>
+        <label>Soups</label>
+    </customValue>
+    <customValue>
+        <fullName>Drinks</fullName>
+        <default>false</default>
+        <label>Drinks</label>
+    </customValue>
+    <masterLabel>DishCategories</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

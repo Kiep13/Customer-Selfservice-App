@@ -20,9 +20,18 @@
                 <template if:true={orderItems}>
                   
                     <p>Dishes you ordered:</p>
-                    <template for:each={orderItems} for:item="item">
+                    <!-- <template for:each={orderItems} for:item="item">
                         <p key={item.id}>{item.fields.Item_Price__c.value}</p>
-                    </template>
+                    </template> -->
+
+                    <!-- <template for:each={orderItems} for:item="item">
+                      <p key={item.id}>{item.fields.Comment_to_dish__c.value}{item.fields.Amount__c.value}{item.fields.Item_Price__c.value}</p>
+                    </template> -->
+
+                    <lightning-datatable key-field="Id"
+                                         data={orderItems}
+                                         columns={columns}>
+                    </lightning-datatable>
                     
                     <div class="slds-text-align_center modal_buttons">
                       <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Close</button>

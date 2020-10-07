@@ -5,8 +5,13 @@
    <description>Order item is added</description>
 
    <lightningMessageFields>
-       <fieldName>orderItem</fieldName>
-       <description>Element that was added</description>
+       <fieldName>orderItemId</fieldName>
+       <description>Element id that was added</description>
    </lightningMessageFields>
+
+   <lightningMessageFields>
+        <fieldName>orderItemPrice</fieldName>
+        <description>Element price that was added</description>
+    </lightningMessageFields>
 
 </LightningMessageChannel>

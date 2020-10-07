@@ -14,6 +14,7 @@ import ORDER_ITEM_OBJECT from '@salesforce/schema/Order_Item__c';
 import DISH_FIELD from '@salesforce/schema/Order_Item__c.Dish__c';
 import AMOUNT_FIELD from '@salesforce/schema/Order_Item__c.Amount__c';
 import COMMENT_FIELD from '@salesforce/schema/Order_Item__c.Comment_to_dish__c';
+import ORDER_FIELD from '@salesforce/schema/Order_Item__c.Dish_Order__c';
 
 export default class AddOredItem extends LightningElement {
 
@@ -29,6 +30,7 @@ export default class AddOredItem extends LightningElement {
   messageContext;
 
   @api dishid;
+  @api orderid;
   dish;
 
   @wire(getRecord, { recordId: '$dishid', fields: [TITLE_FIELD, DESCRIPTION_FIELD, PRICE_FIELD]})
@@ -66,12 +68,12 @@ export default class AddOredItem extends LightningElement {
         [DISH_FIELD.fieldApiName] : this.dishid,
         [AMOUNT_FIELD.fieldApiName] : +amount.value,
         [COMMENT_FIELD.fieldApiName] : comment.value,
+        [ORDER_FIELD.fieldApiName] : this.orderid,
       }
     };
 
     createRecord(recordInput)
       .then(result => {
-        console.log(result);
         this.showToast(this.SUCCESS_TITLE, this.SUCCESS_MESSAGE, this.SUCCESS_VARIANT);
         this.publishMessage(result);
         this.closeModal();
@@ -84,7 +86,8 @@ export default class AddOredItem extends LightningElement {
 
   publishMessage(orderItem) {
     const message = {
-        orderItem
+        orderItemId: orderItem.id,
+        orderItemPrice: orderItem.fields.Item_Price__c.value
     };
     publish(this.messageContext, MESSAGE_CHANNEL, message);
   }
