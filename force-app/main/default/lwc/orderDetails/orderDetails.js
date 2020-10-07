@@ -31,6 +31,10 @@ export default class OrderDetails extends LightningElement {
   }
 
   submitDetails() {
+    const selectedEvent = new CustomEvent('makeorder', {
+      detail: false,
+    });
+    this.dispatchEvent(selectedEvent);
   }
 
 }

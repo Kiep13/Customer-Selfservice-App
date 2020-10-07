@@ -6,11 +6,15 @@
     <p class="slds-var-p-horizontal_small">Order price: {totalPrice}$</p>
     <div class="slds-text-align_center modal_buttons">
       <button class="slds-button slds-button_neutral" title="Order details" onclick={openDetailsModal}>Order details</button>
-      <button class="slds-button slds-button_brand" title="Make an order">Make an order</button>
+      <button class="slds-button slds-button_brand" title="Make an order" onclick={openConfirmModal}>Make an order</button>
     </div>
   </lightning-card>
 
   <template if:true={isDetailsModalOpen}>
-    <c-order-details items={orderItems} onclosemodal={closeDetailsModal}></c-order-details>
+    <c-order-details items={orderItems} onclosemodal={closeDetailsModal} onmakeorder={makeOrder}></c-order-details>
+  </template>
+
+  <template if:true={isConfirmModalOpen} >
+    <c-make-order order={order} total-price={totalPrice} onclosemodal={closeConfirmModal} onsubmit={submitOrder}></c-make-order>
   </template>
 </template>

@@ -18,12 +18,14 @@ export default class CurrentOrder extends LightningElement {
 
   @track totalPrice = 0.0;
   isDetailsModalOpen = false;
+  isConfirmModalOpen = false;
 
-  order;
+  @track order;
   error;
   orderItems = [];
 
   connectedCallback() {
+    console.log('71');
     checkOrderExistence()
       .then(result => {
         this.loadOrder();
@@ -63,7 +65,6 @@ export default class CurrentOrder extends LightningElement {
       .then(result => {
         this.orderItems = result;
         this.resolveTotalPrice();
-        console.log(this.orderItems);
       })
       .catch(error => {
         this.error = error;
@@ -102,8 +103,7 @@ export default class CurrentOrder extends LightningElement {
   }
 
   handleMessage(message) {
-    this.totalPrice += message.orderItemPrice;
-    console.log(message.orderItemId);
+    this.totalPrice =(+this.totalPrice + +message.orderItemPrice).toFixed(2);
     this.loadNewOrderItem(message.orderItemId);
   }
 
@@ -117,11 +117,35 @@ export default class CurrentOrder extends LightningElement {
   } 
 
   openDetailsModal() {
-    console.log(this.orderItems);
     this.isDetailsModalOpen = true;
   }
 
   closeDetailsModal() {
     this.isDetailsModalOpen = false;
+  }
+
+  openConfirmModal() {
+    this.isConfirmModalOpen = true;
+  }
+
+  closeConfirmModal() {
+    this.isConfirmModalOpen = false;
+  }
+
+  makeOrder() {
+    this.closeDetailsModal();
+    this.openConfirmModal();
+  }
+
+  submitOrder() {
+    this.closeConfirmModal();
+    checkOrderExistence()
+      .then(result => {
+        this.loadOrder();
+      })
+      .catch(error => {
+        this.error = error;
+        console.log(error);
+      });
   }
 }
