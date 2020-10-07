@@ -12,9 +12,10 @@ export default class OrderDetails extends LightningElement {
   orderItems = [];
 
   columns = [
+    {label: 'Dish', fieldName: 'Dish__r.Title__c'},
     {label: 'Comment', fieldName: 'Comment_to_dish__c'},
-    {label: 'Amount', fieldName: 'fields.Amount__c.value'},
-    {label: 'Price', fieldName: 'fields.Item_Price__c.value'},
+    {label: 'Amount', fieldName: 'Amount__c'},
+    {label: 'Price', fieldName: 'Item_Price__c'},
   ];
 
   connectedCallback() {

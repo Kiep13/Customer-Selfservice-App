@@ -15,18 +15,11 @@
         
         <div class="slds-modal__content modal_content">
 
-            <div class="modal_form" id="modal-content-id-1">
+            <div class="modal_form detailsCard" id="modal-content-id-1">
     
                 <template if:true={orderItems}>
                   
                     <p>Dishes you ordered:</p>
-                    <!-- <template for:each={orderItems} for:item="item">
-                        <p key={item.id}>{item.fields.Item_Price__c.value}</p>
-                    </template> -->
-
-                    <!-- <template for:each={orderItems} for:item="item">
-                      <p key={item.id}>{item.fields.Comment_to_dish__c.value}{item.fields.Amount__c.value}{item.fields.Item_Price__c.value}</p>
-                    </template> -->
 
                     <lightning-datatable key-field="Id"
                                          data={orderItems}

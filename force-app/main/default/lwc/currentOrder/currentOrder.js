@@ -2,7 +2,6 @@ import { LightningElement, wire, track } from 'lwc';
 import checkOrderExistence from '@salesforce/apex/DishOrderController.checkOrderExistence';
 import getOrder from '@salesforce/apex/DishOrderController.getOrder';
 import getOrderItemsByOrderId from '@salesforce/apex/DishOrderItemController.getOrderItemsByOrderId';
-import getOrderItems from '@salesforce/apex/DishOrderItemController.getOrderItems';
 import getOrderItemById from '@salesforce/apex/DishOrderItemController.getOrderItemById';
 import getTest from '@salesforce/apex/TestCotrnoller.getTest';
 
@@ -41,7 +40,7 @@ export default class CurrentOrder extends LightningElement {
     this.orderItems.forEach((orderItem) => {
       sum += +orderItem.Item_Price__c;
     });
-    this.totalPrice = sum;
+    this.totalPrice = sum.toFixed(2);
   }
 
   loadOrder() {
@@ -60,12 +59,8 @@ export default class CurrentOrder extends LightningElement {
   }
 
   loadOrderItems() {
-    console.log('54');
-    console.log(this.order);
-    console.log(typeof this.order.Id);
-    getOrderItemsByOrderId(this.order.Id)
+    getOrderItemsByOrderId({id: this.order.Id})
       .then(result => {
-        console.log('39');
         this.orderItems = result;
         this.resolveTotalPrice();
         console.log(this.orderItems);
@@ -77,7 +72,7 @@ export default class CurrentOrder extends LightningElement {
   }
 
   loadNewOrderItem(id) {
-    getOrderItemById(id)
+    getOrderItemById({id: id})
     .then(result => {
       this.orderItems.push(result);
       console.log(this.orderItems);
