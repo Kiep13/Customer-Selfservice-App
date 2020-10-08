@@ -1,16 +1,17 @@
 <template>
   <div class="slds-grid slds-gutters">
     <div class="slds-col slds-size_1-of-4">
-        <lightning-combobox label="Category" 
-                            name="category" 
+        <p>Category</p>
+        <!-- <lightning-combobox label="Category"  -->
+          <lightning-combobox name="category" 
                             onchange={handleCategoryChange} 
                             options={controllingValues} 
                             placeholder="--All--" 
                             value={selectedCategory}></lightning-combobox>
     </div>
     <div class="slds-col slds-size_1-of-4">
-        <lightning-combobox label="Subcategory" 
-                            name="subcategory"
+        <p>Subcategory</p>
+        <lightning-combobox name="subcategory"
                             onchange={handleSubcategoryChange} 
                             options={dependentValues} 
                             placeholder="--All--" 
