@@ -19,4 +19,20 @@ public with sharing class DishOrderController {
             insert order;
         }
     }
+
+    @AuraEnabled(cacheable=true)
+    public static List<Dish_Order__c> getPreviousOrders(){
+        Id userId = UserInfo.getUserId();
+        List<Dish_Order__c> orders;
+        
+        try {
+            orders = [SELECT Name, 	Delivery__c, Delivery_address__c, 
+                             Closed_Date__c, Status__c, Total_Price__c
+                      FROM Dish_Order__c WHERE OwnerId = :userId AND Status__c = 'Closed'];
+        } catch (System.QueryException queryException) {
+            orders = new List<Dish_Order__c>();
+        }
+
+        return orders;
+    }
 }

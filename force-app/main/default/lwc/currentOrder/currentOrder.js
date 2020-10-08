@@ -3,7 +3,6 @@ import checkOrderExistence from '@salesforce/apex/DishOrderController.checkOrder
 import getOrder from '@salesforce/apex/DishOrderController.getOrder';
 import getOrderItemsByOrderId from '@salesforce/apex/DishOrderItemController.getOrderItemsByOrderId';
 import getOrderItemById from '@salesforce/apex/DishOrderItemController.getOrderItemById';
-import getTest from '@salesforce/apex/TestCotrnoller.getTest';
 
 import MESSAGE_CHANNEL from "@salesforce/messageChannel/OrderItemMessage__c";
 import ORDER_MC from "@salesforce/messageChannel/OrderMessage__c";
@@ -25,7 +24,7 @@ export default class CurrentOrder extends LightningElement {
   orderItems = [];
 
   connectedCallback() {
-    console.log('73');
+    console.log('85');
     checkOrderExistence()
       .then(result => {
         this.loadOrder();

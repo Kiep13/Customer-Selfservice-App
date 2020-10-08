@@ -1,0 +1,48 @@
+<template>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+      <div class="slds-modal__container">
+          <!-- Modal/Popup Box LWC header here -->
+          <header class="slds-modal__header">
+              <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                  <lightning-icon icon-name="utility:close"
+                      alternative-text="close"
+                      variant="inverse"
+                      size="small" ></lightning-icon>
+                  <span class="slds-assistive-text">Close</span>
+              </button>
+              <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Previous orders</h2>
+          </header>
+          
+          <div class="slds-modal__content modal_content">
+  
+              <div class="modal_form orders_modal" id="modal-content-id-1">
+      
+                  <template if:true={orders}>
+                    
+                      <p>Dishes you ordered:</p>
+  
+                      <lightning-datatable key-field="Id"
+                                           data={orders}
+                                           columns={columns}>
+                      </lightning-datatable>
+
+                      <p class="slds-var-p-horizontal_small">Total orders price: {totalPrice}$</p>
+                      
+                      <div class="slds-text-align_center modal_buttons">
+                        <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Close</button>
+                      </div>
+  
+                  </template>
+  
+                  <template if:true={error}>
+                      <p>Error during attempt to get old orders</p>
+                  </template>
+  
+              </div>
+  
+          </div>
+  
+      </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>

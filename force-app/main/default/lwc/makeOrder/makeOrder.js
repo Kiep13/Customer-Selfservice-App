@@ -7,6 +7,7 @@ import STATUS_FIELD from '@salesforce/schema/Dish_Order__c.Status__c';
 import TOTAL_PRICE_FIELD from '@salesforce/schema/Dish_Order__c.Total_Price__c';
 import DELIVERY_FIELD from '@salesforce/schema/Dish_Order__c.Delivery__c';
 import DELIVERY_ADDRESS_FIELD from '@salesforce/schema/Dish_Order__c.Delivery_address__c';
+import CLOSE_DATE_FIELD from '@salesforce/schema/Dish_Order__c.Closed_Date__c';
 
 export default class MakeOrder extends LightningElement {
 
@@ -49,11 +50,14 @@ export default class MakeOrder extends LightningElement {
   }
 
   makeOrder() {
+    let date = new Date();
+
     const fields = {};
     fields[ID_FIELD.fieldApiName] = this.order.Id;
     fields[STATUS_FIELD.fieldApiName] = 'Closed';
     fields[TOTAL_PRICE_FIELD.fieldApiName] = this.totalPrice;
     fields[DELIVERY_FIELD.fieldApiName] = this.isDelivery;
+    fields[CLOSE_DATE_FIELD.fieldApiName] = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 
     if(this.isDelivery) {
       const input = this.template.querySelector('lightning-input')
@@ -61,6 +65,8 @@ export default class MakeOrder extends LightningElement {
       fields[DELIVERY_ADDRESS_FIELD.fieldApiName] = value;
       input.value = ''
     }
+
+    console.log(fields);
 
     const recordInput = { fields };
 
