@@ -106,5 +106,27 @@ export default class MenuListOptions extends LightningElement {
     this.dispatchEvent(selectedEvent);
   }
 
+  dispatchAmountItemsEvent(amount) {
+    const selectedEvent = new CustomEvent('amountchange', {
+        detail: amount,
+    });
+    this.dispatchEvent(selectedEvent);
+  }
+
+  amountSelected(event) {
+      this.clearButtons();
+      event.target.variant = 'brand';
+
+      this.dispatchAmountItemsEvent(+event.target.value);
+  }
+
+  clearButtons() {
+      const buttons = Array.from(
+        this.template.querySelectorAll('lightning-button')
+      );
+      buttons.forEach((button) => {
+          button.variant = null;
+      })
+  }
 
 }
