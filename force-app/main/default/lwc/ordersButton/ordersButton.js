@@ -5,9 +5,7 @@ export default class OrdersButton extends LightningElement {
   @track isOrdersModal = false;
 
   openModal() {
-    console.log(this.isOrdersModal);
     this.isOrdersModal = true;
-    console.log(this.isOrdersModal);
   }
 
   closeModal() {

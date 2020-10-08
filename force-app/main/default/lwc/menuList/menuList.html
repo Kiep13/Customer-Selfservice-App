@@ -4,8 +4,11 @@
 		<div class="slds-card__body_inner">
 
 			<template if:true={dishes}>
+
+				<c-menu-list-options></c-menu-list-options>
+
 				<lightning-layout multiple-rows="true" pull-to-boundary="small">
-					<template for:each={dishes} for:item="dish">
+					<template for:each={displayesDishes} for:item="dish">
             <lightning-layout-item key={dish.Id}  size="4" class="slds-var-p-around_x-small">
               <c-menu-tile dish={dish} onchoosed={handleChoose}></c-menu-tile>
             </lightning-layout-item>
@@ -19,6 +22,17 @@
 				</div>
 			</template>
 		</div>
+
+		<div class="slds-text-align_center">
+			<lightning-button-group>
+				<lightning-button label="First" onclick={clickFirstPage}></lightning-button>
+				<lightning-button label="Previous" onclick={clickPreviousPage}></lightning-button>
+				<lightning-button label={currentPage}></lightning-button>
+				<lightning-button label="Next" onclick={clickNextPage}></lightning-button>
+				<lightning-button label="Last" onclick={clickLastPage}></lightning-button>
+			</lightning-button-group>
+		</div>
+
   </lightning-card>   
 
   <template if:true={isModalOpen}>

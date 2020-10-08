@@ -28,7 +28,6 @@ export default class OrdersList extends LightningElement {
     getPreviousOrders()
     .then(result => {
       this.orders = result;
-      console.log(this.orders);
       this.solveTotalPrice();
     })
     .catch(error => {
@@ -43,7 +42,6 @@ export default class OrdersList extends LightningElement {
       sum += +order.	Total_Price__c;
     });
     this.totalPrice = sum.toFixed(2);
-    console.log(this.totalPrice);
   }
 
 }

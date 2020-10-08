@@ -9,7 +9,6 @@ import ORDER_MC from "@salesforce/messageChannel/OrderMessage__c";
 import { APPLICATION_SCOPE, subscribe, unsubscribe, MessageContext, publish } from 'lightning/messageService';
 
 
-
 export default class CurrentOrder extends LightningElement {
 
   @wire(MessageContext)
@@ -24,7 +23,7 @@ export default class CurrentOrder extends LightningElement {
   orderItems = [];
 
   connectedCallback() {
-    console.log('85');
+    console.log('90');
     checkOrderExistence()
       .then(result => {
         this.loadOrder();

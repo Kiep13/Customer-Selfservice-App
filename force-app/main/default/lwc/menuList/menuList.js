@@ -16,6 +16,12 @@ export default class MenuList extends LightningElement {
   @track dishId;
   @track orderId;
 
+  @track displayesDishes = [];
+
+  @track currentPage = 1;
+  @track amountPages = 0;
+  @track itemsOnPage = 6;
+
   connectedCallback() {
     this.loadMenu();
     this.subscribeToMessageChannel();
@@ -25,9 +31,41 @@ export default class MenuList extends LightningElement {
     getMenu()
     .then(result => {
       this.dishes = result;
+      this.resolveDisplayedDishes();
+      this.amountPages = Math.ceil(this.dishes.length / 6);
     })
     .catch(error => {
       this.error = error;
+    });
+  }
+
+  clickFirstPage() {
+    this.currentPage = 1;
+    this.resolveDisplayedDishes();
+  }
+
+  clickNextPage() {
+    if(this.currentPage == this.amountPages) return;
+
+    this.currentPage++;
+    this.resolveDisplayedDishes();
+  }
+
+  clickPreviousPage() {
+    if(this.currentPage == 1) return;
+
+    this.currentPage--;
+    this.resolveDisplayedDishes();
+  }
+
+  clickLastPage() {
+    this.currentPage = this.amountPages;
+    this.resolveDisplayedDishes();
+  }
+
+  resolveDisplayedDishes() {
+    this.displayesDishes = this.dishes.filter((item, index) => {
+      return index >= (this.currentPage-1) * this.itemsOnPage && index < (this.currentPage) * this.itemsOnPage;
     });
   }
 

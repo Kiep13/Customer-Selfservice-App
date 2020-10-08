@@ -1,0 +1,33 @@
+<template>
+  <div class="slds-grid slds-gutters">
+    <div class="slds-col slds-size_1-of-4">
+        <lightning-combobox label="Category" 
+                            name="category" 
+                            onchange={handleCategoryChange} 
+                            options={controllingValues} 
+                            placeholder="--All--" 
+                            value={selectedCategory}></lightning-combobox>
+    </div>
+    <div class="slds-col slds-size_1-of-4">
+        <lightning-combobox label="Subcategory" 
+                            name="subcategory"
+                            onchange={handleSubcategoryChange} 
+                            options={dependentValues} 
+                            placeholder="--All--" 
+                            value={selectedSubcategory}
+                            disabled={isEmpty}></lightning-combobox>
+    </div>
+    <div class="slds-col slds-size_1-of-4">
+      <p>Amount of items</p>
+      <lightning-button-group>
+        <lightning-button label="6"></lightning-button>
+        <lightning-button label="12"></lightning-button>
+        <lightning-button label="18"></lightning-button>
+      </lightning-button-group>
+    </div>
+  </div>
+
+  <div if:true={error}>
+      <p>{error}</p>
+  </div>
+</template>
