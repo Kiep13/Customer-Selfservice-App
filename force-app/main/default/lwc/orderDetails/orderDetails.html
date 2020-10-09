@@ -25,12 +25,13 @@
                         <lightning-datatable key-field="Id"
                                             data={orderItems}
                                             columns={columns}
+                                            onrowaction={handleRowAction}
                                             hide-checkbox-column>
                         </lightning-datatable>
-                        
+
                         <div class="slds-text-align_center modal_buttons">
-                        <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Close</button>
-                        <button class="slds-button slds-button_brand" onclick={submitDetails} title="OK">Make an order</button>
+                          <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Close</button>
+                          <button class="slds-button slds-button_brand" onclick={submitDetails} title="OK">Make an order</button>
                         </div>
                     </template>
                     

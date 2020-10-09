@@ -1,4 +1,5 @@
 import { LightningElement, wire, track } from 'lwc';
+import { deleteRecord } from 'lightning/uiRecordApi';
 import checkOrderExistence from '@salesforce/apex/DishOrderController.checkOrderExistence';
 import getOrder from '@salesforce/apex/DishOrderController.getOrder';
 import getOrderItemsByOrderId from '@salesforce/apex/DishOrderItemController.getOrderItemsByOrderId';
@@ -23,7 +24,7 @@ export default class CurrentOrder extends LightningElement {
   orderItems = [];
 
   connectedCallback() {
-    console.log('109');
+    console.log('110');
     checkOrderExistence()
       .then(result => {
         this.loadOrder();
@@ -130,6 +131,21 @@ export default class CurrentOrder extends LightningElement {
 
   closeConfirmModal() {
     this.isConfirmModalOpen = false;
+  }
+
+  deleteOrderItem(event) {
+    const id = event.detail;
+
+    deleteRecord(id)
+      .then(() => {
+        this.orderItems = this.orderItems.filter((orderItem) => {
+          return orderItem.Id != id;
+        })
+        this.resolveTotalPrice();
+      })
+     .catch(error => {
+        this.error = error;
+      });
   }
 
   makeOrder() {

@@ -5,17 +5,23 @@ export default class OrderDetails extends LightningElement {
   @api items;
   @track orderItems = [];
 
+  actions = [
+    { label: 'Delete', name: 'delete' }
+  ];
+
   columns = [
-    {label: 'Dish', fieldName: 'Title__c'},
-    {label: 'Comment', fieldName: 'Comment_to_dish__c'},
-    {label: 'Amount', fieldName: 'Amount__c'},
-    {label: 'Price', fieldName: 'Item_Price__c'},
+    {label: 'Dish', fieldName: 'Title__c', hideDefaultActions: true},
+    {label: 'Comment', fieldName: 'Comment_to_dish__c', hideDefaultActions: true},
+    {label: 'Amount', fieldName: 'Amount__c', hideDefaultActions: true},
+    {label: 'Price', fieldName: 'Item_Price__c', hideDefaultActions: true},
+    {type: 'action', typeAttributes: { rowActions: this.actions, menuAlignment: 'right' }}
   ];
 
   connectedCallback() {
     const intermedItems = JSON.parse(JSON.stringify(this.items));
     intermedItems.forEach((item) => {
       const orderItem = {};
+      orderItem.Id = item.Id;
       orderItem.Title__c = item.Dish__r.Title__c;
       orderItem.Comment_to_dish__c = item.Comment_to_dish__c;
       orderItem.Amount__c = item.Amount__c;
@@ -40,6 +46,19 @@ export default class OrderDetails extends LightningElement {
       detail: false,
     });
     this.dispatchEvent(selectedEvent);
+  }
+
+  handleRowAction(event) {
+    const row = JSON.parse(JSON.stringify(event.detail.row));
+
+    const selectedEvent = new CustomEvent('deleted', {
+      detail: row.Id,
+    });
+    this.dispatchEvent(selectedEvent);
+
+    this.orderItems = this.orderItems.filter((orderItem) => {
+      return orderItem.Id != row.Id;
+    });
   }
 
 }

@@ -15,9 +15,9 @@ export default class OrdersList extends LightningElement {
   filterDish = this.FILTER_ALL;
 
   columns = [
-    {label: 'Date', fieldName: 'Closed_Date__c'},
-    {label: 'Status', fieldName: 'Status__c'},
-    {label: 'Price', fieldName: 'Total_Price__c', type: 'currency'}
+    {label: 'Date', fieldName: 'Closed_Date__c', hideDefaultActions: true},
+    {label: 'Status', fieldName: 'Status__c', hideDefaultActions: true},
+    {label: 'Price', fieldName: 'Total_Price__c', type: 'currency', hideDefaultActions: true}
   ];
 
   get isEmpty() {

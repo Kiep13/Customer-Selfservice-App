@@ -11,7 +11,10 @@
   </lightning-card>
 
   <template if:true={isDetailsModalOpen}>
-    <c-order-details items={orderItems} onclosemodal={closeDetailsModal} onmakeorder={makeOrder}></c-order-details>
+    <c-order-details items={orderItems} 
+                     onclosemodal={closeDetailsModal} 
+                     onmakeorder={makeOrder}
+                     ondeleted={deleteOrderItem}></c-order-details>
   </template>
 
   <template if:true={isConfirmModalOpen} >
