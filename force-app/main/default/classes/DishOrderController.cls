@@ -27,7 +27,8 @@ public with sharing class DishOrderController {
         
         try {
             orders = [SELECT Name, 	Delivery__c, Delivery_address__c, 
-                             Closed_Date__c, Status__c, Total_Price__c
+                             Closed_Date__c, Status__c, Total_Price__c,
+                             (SELECT Dish__r.Title__c FROM Order_Items__r) 
                       FROM Dish_Order__c WHERE OwnerId = :userId AND Status__c = 'Closed'];
         } catch (System.QueryException queryException) {
             orders = new List<Dish_Order__c>();

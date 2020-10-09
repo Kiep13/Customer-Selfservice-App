@@ -21,16 +21,28 @@
                     
                     <template if:false={isEmpty}>
 
-                      <p>Dishes you ordered:</p>
-  
-                      <lightning-datatable key-field="Id"
-                                           data={orders}
-                                           columns={columns}
-                                           hide-checkbox-column>
-                      </lightning-datatable>
+                      <c-order-list-options orders={orders}
+                                            onstatuschange={filterStatusChange}
+                                            ondatechange={filterDateChange}
+                                            ondishchange={filterDishChange}>
+                                        </c-order-list-options>
 
-                      <p class="slds-var-p-horizontal_small">Total orders price: {totalPrice}$</p>
-                      
+                       <template if:false={isEmptyFilter}>
+                         <p>Dishes you ordered:</p>
+
+                         <lightning-datatable key-field="Id"
+                                              data={filteredOrders}
+                                              columns={columns}
+                                              hide-checkbox-column>
+                         </lightning-datatable>
+                
+                         <p class="slds-var-p-horizontal_small">Total orders price: {totalPrice}$</p>
+                       </template> 
+
+                       <template if:true={isEmptyFilter}>
+                         No items to display
+                       </template>
+
                     </template>
 
                     <template if:true={isEmpty}>
