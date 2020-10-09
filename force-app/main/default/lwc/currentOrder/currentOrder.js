@@ -23,7 +23,7 @@ export default class CurrentOrder extends LightningElement {
   orderItems = [];
 
   connectedCallback() {
-    console.log('105');
+    console.log('109');
     checkOrderExistence()
       .then(result => {
         this.loadOrder();
@@ -47,8 +47,9 @@ export default class CurrentOrder extends LightningElement {
     getOrder()
     .then(result => {
       this.order = result;
+      console.log(this.order);
       this.loadOrderItems();
-      setInterval(() => {
+      setTimeout(() => {
         this.publishMessage();
       }, 5000);
     })
@@ -66,6 +67,7 @@ export default class CurrentOrder extends LightningElement {
       })
       .catch(error => {
         this.error = error;
+        this.resolveTotalPrice();
         console.log(error);
       });
   }

@@ -66,8 +66,6 @@ export default class MakeOrder extends LightningElement {
       input.value = ''
     }
 
-    console.log(fields);
-
     const recordInput = { fields };
 
     updateRecord(recordInput)

@@ -1,5 +1,5 @@
 public with sharing class DishOrderController {
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static Dish_Order__c getOrder() {
         Id userId = UserInfo.getUserId();
         Dish_Order__c order = [SELECT Name FROM Dish_Order__c WHERE OwnerId = :userId AND Status__c = 'Open' LIMIT 1];
@@ -20,7 +20,7 @@ public with sharing class DishOrderController {
         }
     }
 
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static List<Dish_Order__c> getPreviousOrders(){
         Id userId = UserInfo.getUserId();
         List<Dish_Order__c> orders;

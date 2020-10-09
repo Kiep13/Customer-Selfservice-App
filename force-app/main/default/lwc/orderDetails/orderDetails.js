@@ -14,7 +14,6 @@ export default class OrderDetails extends LightningElement {
 
   connectedCallback() {
     const intermedItems = JSON.parse(JSON.stringify(this.items));
-    console.log(intermedItems);
     intermedItems.forEach((item) => {
       const orderItem = {};
       orderItem.Title__c = item.Dish__r.Title__c;
