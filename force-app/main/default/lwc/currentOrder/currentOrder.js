@@ -23,7 +23,7 @@ export default class CurrentOrder extends LightningElement {
   orderItems = [];
 
   connectedCallback() {
-    console.log('99');
+    console.log('101');
     checkOrderExistence()
       .then(result => {
         this.loadOrder();

@@ -19,18 +19,27 @@
       
                   <template if:true={orders}>
                     
+                    <template if:false={isEmpty}>
+
                       <p>Dishes you ordered:</p>
   
                       <lightning-datatable key-field="Id"
                                            data={orders}
-                                           columns={columns}>
+                                           columns={columns}
+                                           hide-checkbox-column>
                       </lightning-datatable>
 
                       <p class="slds-var-p-horizontal_small">Total orders price: {totalPrice}$</p>
                       
-                      <div class="slds-text-align_center modal_buttons">
+                    </template>
+
+                    <template if:true={isEmpty}>
+                        Your order history is clear
+                    </template>
+
+                    <div class="slds-text-align_center modal_buttons">
                         <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Close</button>
-                      </div>
+                    </div>
   
                   </template>
   

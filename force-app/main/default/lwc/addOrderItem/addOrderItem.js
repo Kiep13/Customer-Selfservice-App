@@ -62,6 +62,10 @@ export default class AddOredItem extends LightningElement {
     );
     const [amount, comment] = inputs;
 
+    if(!amount.value || +amount.value <= 0 || !!amount.value.split(".")[1]) {
+      return;
+    }
+
     const recordInput = {
       apiName: ORDER_ITEM_OBJECT.objectApiName,
       fields: {

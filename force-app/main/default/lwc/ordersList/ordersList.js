@@ -13,6 +13,10 @@ export default class OrdersList extends LightningElement {
     {label: 'Price', fieldName: 'Total_Price__c', type: 'currency'}
   ];
 
+  get isEmpty() {
+    return this.orders.length == 0;
+  }
+
   connectedCallback() {
     this.loadOldOrders();
   }

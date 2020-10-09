@@ -26,6 +26,11 @@ export default class MenuList extends LightningElement {
   filterCategory = this.FILTER_ALL;
   filterSubcategory = this.FILTER_ALL;
 
+  @track isFirstDisabled = true;
+  @track isPreviousDisabled = true;
+  @track isNextDisabled = true;
+  @track isLastDisabled = true;
+
   connectedCallback() {
     this.loadMenu();
     this.subscribeToMessageChannel();
@@ -48,7 +53,7 @@ export default class MenuList extends LightningElement {
   }
 
   clickNextPage() {
-    if(this.currentPage == this.amountPages) return;
+    if(this.currentPage >= this.amountPages) return;
 
     this.currentPage++;
     this.resolveDisplayedDishes();
@@ -72,6 +77,7 @@ export default class MenuList extends LightningElement {
 
   subcategoryChange(event) {
     this.filterSubcategory = event.detail;
+    this.currentPage = 1;
     this.resolveDisplayedDishes();
   }
 
@@ -93,6 +99,10 @@ export default class MenuList extends LightningElement {
     });
   }
 
+  get dishesLength() {
+    return this.displayesDishes == 0;
+  }
+
   amountChange(event) {
     this.itemsOnPage = event.detail;
     this.resolveDisplayedDishes();
@@ -104,6 +114,7 @@ export default class MenuList extends LightningElement {
     this.displayesDishes = filteredDishes.filter((item, index) => {
       return index >= (this.currentPage-1) * this.itemsOnPage && index < (this.currentPage) * this.itemsOnPage;
     });
+    this.repaintPaginationButtons();
   }
 
   handleChoose(event) {
@@ -139,4 +150,21 @@ export default class MenuList extends LightningElement {
     this.unsubscribeToMessageChannel();
   } 
 
+  repaintPaginationButtons() {
+    if(this.currentPage == 1) {
+      this.isFirstDisabled = true;
+      this.isPreviousDisabled = true;
+    } else {
+      this.isFirstDisabled = false;
+      this.isPreviousDisabled = false;
+    }
+
+    if(this.currentPage >= this.amountPages) {
+      this.isNextDisabled = true;
+      this.isLastDisabled = true;
+    } else {
+      this.isNextDisabled = false;
+      this.isLastDisabled = false;
+    }
+  }
 }
