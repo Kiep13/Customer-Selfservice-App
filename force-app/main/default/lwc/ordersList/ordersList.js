@@ -80,7 +80,7 @@ export default class OrdersList extends LightningElement {
 
   solveTotalPrice() {
     let sum = 0.0;
-    this.orders.forEach((order) => {
+    this.filteredOrders.forEach((order) => {
       sum += +order.Total_Price__c;
     });
     this.totalPrice = sum.toFixed(2);
@@ -89,16 +89,19 @@ export default class OrdersList extends LightningElement {
   filterStatusChange(event) {
     this.filterStatus = event.detail;
     this.filterOrders();
+    this.solveTotalPrice();
   }
 
   filterDateChange(event) {
     this.filterDate = event.detail;
     this.filterOrders();
+    this.solveTotalPrice();
   }
 
   filterDishChange(event) {
     this.filterDish = event.detail;
     this.filterOrders();
+    this.solveTotalPrice();
   }
 
 }

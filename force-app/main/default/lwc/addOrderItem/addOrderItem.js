@@ -69,8 +69,8 @@ export default class AddOredItem extends LightningElement {
       return;
     }
 
-    if(amount.value > 10) {
-      this.ShowToastEvent(this.WARNING_TITLE, this.TOO_MUCH_DISHES_MESSAGE, this.WARNING_VARIANT);
+    if(+amount.value > 10) {
+      this.showToast(this.WARNING_TITLE, this.TOO_MUCH_DISHES_MESSAGE, this.WARNING_VARIANT);
       return;
     }
 

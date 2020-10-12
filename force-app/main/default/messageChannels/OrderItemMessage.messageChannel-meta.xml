@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
-   <masterLabel>OrderItemMessage</masterLabel>
-   <isExposed>true</isExposed>
-   <description>Order item is added</description>
-
-   <lightningMessageFields>
-       <fieldName>orderItemId</fieldName>
-       <description>Element id that was added</description>
-   </lightningMessageFields>
-
-   <lightningMessageFields>
-        <fieldName>orderItemPrice</fieldName>
-        <description>Element price that was added</description>
+    <description>Order item is added</description>
+    <isExposed>true</isExposed>
+    <lightningMessageFields>
+        <description>Element id that was added</description>
+        <fieldName>orderItemId</fieldName>
     </lightningMessageFields>
-
+    <lightningMessageFields>
+        <description>Element price that was added</description>
+        <fieldName>orderItemPrice</fieldName>
+    </lightningMessageFields>
+    <masterLabel>OrderItemMessage</masterLabel>
 </LightningMessageChannel>

@@ -67,6 +67,7 @@ export default class OrderListOptions extends LightningElement {
     const setDishes = new Set();
     this.orders.forEach((order) => {
       const orderItems = order.Order_Items__r;
+      console.log(orderItems);
       orderItems.forEach((orderItem) => {
         setDishes.add(orderItem.Dish__r.Title__c);
       });

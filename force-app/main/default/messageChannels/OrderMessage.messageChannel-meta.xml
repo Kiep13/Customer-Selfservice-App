@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
-   <masterLabel>OrderMessage</masterLabel>
-   <isExposed>true</isExposed>
-   <description>Order id is added</description>
-
-   <lightningMessageFields>
-       <fieldName>orderId</fieldName>
-       <description>Id of current order</description>
-   </lightningMessageFields>
-
+    <description>Order id is added</description>
+    <isExposed>true</isExposed>
+    <lightningMessageFields>
+        <description>Id of current order</description>
+        <fieldName>orderId</fieldName>
+    </lightningMessageFields>
+    <masterLabel>OrderMessage</masterLabel>
 </LightningMessageChannel>
