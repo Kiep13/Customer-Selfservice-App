@@ -19,12 +19,15 @@ export default class MakeOrder extends LightningElement {
   ERROR_MESSAGE = 'Error during submitting order';
   ERROR_VARIANT = 'error';
 
+  ERROR_EMPTY_ORDER = 'Can\' make empty order';
+
   DELIVERY_CHOISE = 'delivery';
 
   @api totalPrice;
   @api order;
 
   @track isDelivery = false;
+  @track deliveryValue = '';
 
   value = '';
 
@@ -45,12 +48,22 @@ export default class MakeOrder extends LightningElement {
   }
 
   handleReceive(event) {
-    const selectedOption = event.detail.value;
-    this.isDelivery = selectedOption == this.DELIVERY_CHOISE;
+    this.deliveryValue = event.detail.value;
+    //const selectedOption = event.detail.value;
+    this.isDelivery = this.deliveryValue == this.DELIVERY_CHOISE;
   }
 
   makeOrder() {
     let date = new Date();
+
+    if(this.totalPrice <= 0) {
+      this.showToast(this.ERROR_TITLE, this.ERROR_EMPTY_ORDER, this.ERROR_VARIANT);
+      return;
+    }
+
+    if(this.deliveryValue == '') {
+      return;
+    }
 
     const fields = {};
     fields[ID_FIELD.fieldApiName] = this.order.Id;
@@ -77,7 +90,7 @@ export default class MakeOrder extends LightningElement {
         this.showToast(this.SUCCESS_TITLE, this.SUCCESS_MESSAGE, this.SUCCESS_VARIANT);
       })
       .catch(error => {
-        this.showToast(this.ERROR_TITLE. ERROR_MESSAGE, this.ERROR_VARIANT);
+        this.showToast(this.ERROR_TITLE, this.ERROR_MESSAGE, this.ERROR_VARIANT);
       });
   }
 

@@ -63,7 +63,6 @@ export default class OrdersList extends LightningElement {
 
     if(this.filterDate != this.FILTER_ALL) {
       this.filteredOrders = this.filteredOrders.filter((order) => {
-        console.log(order.Closed_Date__c, this.filterDate);
         return order.Closed_Date__c == this.filterDate;
       })
     }

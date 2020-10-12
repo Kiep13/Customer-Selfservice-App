@@ -24,7 +24,8 @@
                           options={options}
                           value={value}
                           type="radio"
-                          onchange={handleReceive}></lightning-radio-group>
+                          onchange={handleReceive}
+                          required></lightning-radio-group>
 
               <template if:true={isDelivery}>
                 <lightning-input type="text" label="Specify delivery address" name="address"></lightning-input>

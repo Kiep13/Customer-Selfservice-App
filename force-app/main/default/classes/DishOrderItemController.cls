@@ -3,12 +3,8 @@ public with sharing class DishOrderItemController {
     public static List<Order_Item__c> getOrderItemsByOrderId(String id) {
         List<Order_Item__c> items;
 
-        try {
-            items = [SELECT Dish__r.Title__c, Dish_Order__c, Amount__c, Comment_to_dish__c, Item_Price__c
-                     FROM Order_Item__c WHERE Dish_Order__c = :id];
-        } catch (System.QueryException queryException) {
-            items = new List<Order_Item__c>();
-        }
+        items = [SELECT Dish__r.Title__c, Dish_Order__c, Amount__c, Comment_to_dish__c, Item_Price__c
+                 FROM Order_Item__c WHERE Dish_Order__c = :id];
 
         return items;
     }

@@ -5,7 +5,6 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import MESSAGE_CHANNEL from "@salesforce/messageChannel/OrderItemMessage__c";
 import { publish, MessageContext } from 'lightning/messageService';
 
-//import DISH_OBJECT from '@salesforce/schema/Dish__c';
 import TITLE_FIELD from '@salesforce/schema/Dish__c.Title__c';
 import DESCRIPTION_FIELD from '@salesforce/schema/Dish__c.Description__c';
 import PRICE_FIELD from '@salesforce/schema/Dish__c.Price__c';
@@ -25,6 +24,10 @@ export default class AddOredItem extends LightningElement {
   ERROR_TITLE = 'Error';
   ERROR_MESSAGE = 'Error during adding new order item';
   ERROR_VARIANT = 'error';
+
+  WARNING_TITLE = 'Warning';
+  WARNING_VARIANT = 'warning';
+  TOO_MUCH_DISHES_MESSAGE = 'Are you so hungry?';
 
   @wire(MessageContext)
   messageContext;
@@ -63,6 +66,11 @@ export default class AddOredItem extends LightningElement {
     const [amount, comment] = inputs;
 
     if(!amount.value || +amount.value <= 0 || !!amount.value.split(".")[1]) {
+      return;
+    }
+
+    if(amount.value > 10) {
+      this.ShowToastEvent(this.WARNING_TITLE, this.TOO_MUCH_DISHES_MESSAGE, this.WARNING_VARIANT);
       return;
     }
 

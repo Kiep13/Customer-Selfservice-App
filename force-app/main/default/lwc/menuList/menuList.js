@@ -141,7 +141,7 @@ export default class MenuList extends LightningElement {
     this.orderId = message.orderId;
   }
 
-  unsubscribeMessageChannel() {
+  unsubscribeToMessageChannel() {
       unsubscribe(this.subscription);
       this.subscription = null;
   }

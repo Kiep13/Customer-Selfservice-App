@@ -10,7 +10,7 @@ export default class MenuListOptions extends LightningElement {
   @track dependentValues = [];
   @track selectedCategory;
   @track selectedSubcategory;
-  @track isEmpty = false;
+  @track isEmpty = true;
   @track error;
   controlValues;
   totalDependentValues = [];

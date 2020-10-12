@@ -48,7 +48,6 @@ export default class CurrentOrder extends LightningElement {
     getOrder()
     .then(result => {
       this.order = result;
-      console.log(this.order);
       this.loadOrderItems();
       setTimeout(() => {
         this.publishMessage();
@@ -108,7 +107,7 @@ export default class CurrentOrder extends LightningElement {
     this.loadNewOrderItem(message.orderItemId);
   }
 
-  unsubscribeMessageChannel() {
+  unsubscribeToMessageChannel() {
       unsubscribe(this.subscription);
       this.subscription = null;
   }
