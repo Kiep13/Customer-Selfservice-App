@@ -41,13 +41,6 @@ export default class OrderDetails extends LightningElement {
     this.dispatchEvent(selectedEvent);
   }
 
-  submitDetails() {
-    const selectedEvent = new CustomEvent('makeorder', {
-      detail: false,
-    });
-    this.dispatchEvent(selectedEvent);
-  }
-
   handleRowAction(event) {
     const row = JSON.parse(JSON.stringify(event.detail.row));
 
@@ -61,4 +54,10 @@ export default class OrderDetails extends LightningElement {
     });
   }
 
+  submitDetails() {
+    const selectedEvent = new CustomEvent('makeorder', {
+      detail: false,
+    });
+    this.dispatchEvent(selectedEvent);
+  }
 }

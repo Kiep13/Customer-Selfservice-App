@@ -22,24 +22,23 @@ export default class OrderListOptions extends LightningElement {
 
   @wire(getPicklistValuesByRecordType, { objectApiName: ORDER_OBJECT, recordTypeId: '$objectInfo.data.defaultRecordTypeId'})
   statusPicklistValues({error, data}) {
-      if(data) {
-          this.error = null;
+    if(data) {
+      this.error = null;
 
-          let statusOptions = [{label:'--All--', value:'--All--'}];
+      let statusOptions = [{label:'--All--', value:'--All--'}];
 
-          data.picklistFieldValues.Status__c.values.forEach(key => {
-            statusOptions.push({
-                  label : key.label,
-                  value: key.value
-              })
-          });
+      data.picklistFieldValues.Status__c.values.forEach(key => {
+        statusOptions.push({
+          label : key.label,
+          value: key.value
+        })
+      });
 
-          this.statusValues = statusOptions;
-          this.selectedStatus = '--All--';
-      }
-      else if(error) {
-          this.error = JSON.stringify(error);
-      }
+      this.statusValues = statusOptions;
+      this.selectedStatus = '--All--';
+    } else if(error) {
+      this.error = JSON.stringify(error);
+    }
   }
 
   connectedCallback() {
@@ -67,16 +66,15 @@ export default class OrderListOptions extends LightningElement {
     const setDishes = new Set();
     this.orders.forEach((order) => {
       const orderItems = order.Order_Items__r;
-      console.log(orderItems);
       orderItems.forEach((orderItem) => {
         setDishes.add(orderItem.Dish__r.Title__c);
       });
-    })
+    });
 
     const arrayDishes = [...setDishes];
     arrayDishes.sort((firstTitle, secondTitle) => {
       return firstTitle.localeCompare(secondTitle);
-    })
+    });
 
     arrayDishes.forEach((dishTitle) => {
       this.dishValues.push({
@@ -109,5 +107,4 @@ export default class OrderListOptions extends LightningElement {
     });
     this.dispatchEvent(selectedEvent);
   }
-
 }

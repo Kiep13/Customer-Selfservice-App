@@ -1,5 +1,6 @@
 import { LightningElement, wire, track } from 'lwc';
 import { deleteRecord } from 'lightning/uiRecordApi';
+
 import checkOrderExistence from '@salesforce/apex/DishOrderController.checkOrderExistence';
 import getOrder from '@salesforce/apex/DishOrderController.getOrder';
 import getOrderItemsByOrderId from '@salesforce/apex/DishOrderItemController.getOrderItemsByOrderId';
@@ -16,32 +17,23 @@ export default class CurrentOrder extends LightningElement {
   messageContext;
 
   @track totalPrice = 0.0;
-  isDetailsModalOpen = false;
-  isConfirmModalOpen = false;
 
   @track order;
   error;
   orderItems = [];
 
+  isDetailsModalOpen = false;
+  isConfirmModalOpen = false;
+
   connectedCallback() {
-    console.log('110');
     checkOrderExistence()
       .then(result => {
         this.loadOrder();
       })
       .catch(error => {
         this.error = error;
-        console.log(error);
       });
     this.subscribeToMessageChannel();
-  }
-
-  resolveTotalPrice() {
-    let sum = 0;
-    this.orderItems.forEach((orderItem) => {
-      sum += +orderItem.Item_Price__c;
-    });
-    this.totalPrice = sum.toFixed(2);
   }
 
   loadOrder() {
@@ -84,52 +76,12 @@ export default class CurrentOrder extends LightningElement {
     });
   }
 
-  publishMessage() {
-    const message = {
-        orderId: this.order.Id
-    };
-    publish(this.messageContext, ORDER_MC, message);
-  }
-
-  subscribeToMessageChannel() {
-    if (!this.subscription) {
-        this.subscription = subscribe(
-            this.messageContext,
-            MESSAGE_CHANNEL,
-            (message) => this.handleMessage(message),
-            { scope: APPLICATION_SCOPE }
-        );
-    }
-  }
-
-  handleMessage(message) {
-    this.totalPrice =(+this.totalPrice + +message.orderItemPrice).toFixed(2);
-    this.loadNewOrderItem(message.orderItemId);
-  }
-
-  unsubscribeToMessageChannel() {
-      unsubscribe(this.subscription);
-      this.subscription = null;
-  }
-
-  disconnectedCallback() {
-    this.unsubscribeToMessageChannel();
-  } 
-
-  openDetailsModal() {
-    this.isDetailsModalOpen = true;
-  }
-
-  closeDetailsModal() {
-    this.isDetailsModalOpen = false;
-  }
-
-  openConfirmModal() {
-    this.isConfirmModalOpen = true;
-  }
-
-  closeConfirmModal() {
-    this.isConfirmModalOpen = false;
+  resolveTotalPrice() {
+    let sum = 0;
+    this.orderItems.forEach((orderItem) => {
+      sum += +orderItem.Item_Price__c;
+    });
+    this.totalPrice = sum.toFixed(2);
   }
 
   deleteOrderItem(event) {
@@ -163,4 +115,52 @@ export default class CurrentOrder extends LightningElement {
         console.log(error);
       });
   }
+
+  openDetailsModal() {
+    this.isDetailsModalOpen = true;
+  }
+
+  closeDetailsModal() {
+    this.isDetailsModalOpen = false;
+  }
+
+  openConfirmModal() {
+    this.isConfirmModalOpen = true;
+  }
+
+  closeConfirmModal() {
+    this.isConfirmModalOpen = false;
+  }
+
+  subscribeToMessageChannel() {
+    if (!this.subscription) {
+        this.subscription = subscribe(
+            this.messageContext,
+            MESSAGE_CHANNEL,
+            (message) => this.handleMessage(message),
+            { scope: APPLICATION_SCOPE }
+        );
+    }
+  }
+
+  handleMessage(message) {
+    this.totalPrice =(+this.totalPrice + +message.orderItemPrice).toFixed(2);
+    this.loadNewOrderItem(message.orderItemId);
+  }
+
+  unsubscribeToMessageChannel() {
+      unsubscribe(this.subscription);
+      this.subscription = null;
+  }
+
+  publishMessage() {
+    const message = {
+        orderId: this.order.Id
+    };
+    publish(this.messageContext, ORDER_MC, message);
+  }
+
+  disconnectedCallback() {
+    this.unsubscribeToMessageChannel();
+  } 
 }

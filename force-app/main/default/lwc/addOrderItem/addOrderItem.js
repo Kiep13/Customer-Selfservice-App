@@ -36,20 +36,19 @@ export default class AddOredItem extends LightningElement {
   @api orderid;
   dish;
 
+  objectApiName = ORDER_ITEM_OBJECT;
+  fields = [DISH_FIELD, AMOUNT_FIELD, COMMENT_FIELD];
+
   @wire(getRecord, { recordId: '$dishid', fields: [TITLE_FIELD, DESCRIPTION_FIELD, PRICE_FIELD]})
   wiredAccount({data, error}) {
     if (data) {
       this.dish = data;
       this.error = undefined;
     } else if (error) {
-      console.log(error);
       this.error = error;
       this.dish = undefined;
     }
   }
-
-  objectApiName = ORDER_ITEM_OBJECT;
-  fields = [DISH_FIELD, AMOUNT_FIELD, COMMENT_FIELD];
 
   closeModal() {
     const selectedEvent = new CustomEvent('closemodal', {
@@ -91,7 +90,6 @@ export default class AddOredItem extends LightningElement {
         this.closeModal();
       })
       .catch(error => {
-        console.log(error);
         this.showToast(this.ERROR_TITLE, this.ERROR_MESSAGE, this.ERROR_VARIANT);
       });
   }

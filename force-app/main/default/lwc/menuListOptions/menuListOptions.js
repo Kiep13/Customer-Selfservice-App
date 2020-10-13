@@ -12,121 +12,122 @@ export default class MenuListOptions extends LightningElement {
   @track selectedSubcategory;
   @track isEmpty = true;
   @track error;
-  controlValues;
-  totalDependentValues = [];
 
   @wire(getObjectInfo, { objectApiName: DISH_OBJECT })
   objectInfo;
 
+  controlValues;
+  totalDependentValues = [];
+
+  
+
   @wire(getPicklistValuesByRecordType, { objectApiName: DISH_OBJECT, recordTypeId: '$objectInfo.data.defaultRecordTypeId'})
   categoryPicklistValues({error, data}) {
-      if(data) {
-          this.error = null;
+    if(data) {
+      this.error = null;
 
-          let categoryOptions = [{label:'--All--', value:'--All--'}];
+      let categoryOptions = [{label:'--All--', value:'--All--'}];
 
-          data.picklistFieldValues.Category__c.values.forEach(key => {
-            categoryOptions.push({
-                  label : key.label,
-                  value: key.value
-              })
-          });
+      data.picklistFieldValues.Category__c.values.forEach(key => {
+        categoryOptions.push({
+          label : key.label,
+          value: key.value
+        })
+      });
 
-          this.controllingValues = categoryOptions;
+      this.controllingValues = categoryOptions;
 
-          let subcategoryOptions = [{label:'--All--', value:'--All--'}];
+      let subcategoryOptions = [{label:'--All--', value:'--All--'}];
 
-          this.controlValues = data.picklistFieldValues.Subcategory__c.controllerValues;
-          this.totalDependentValues = data.picklistFieldValues.Subcategory__c.values;
+      this.controlValues = data.picklistFieldValues.Subcategory__c.controllerValues;
+      this.totalDependentValues = data.picklistFieldValues.Subcategory__c.values;
 
-          this.totalDependentValues.forEach(key => {
-              subcategoryOptions.push({
-                  label : key.label,
-                  value: key.value
-              })
-          });
+      this.totalDependentValues.forEach(key => {
+        subcategoryOptions.push({
+          label : key.label,
+          value: key.value
+        })
+      });
 
-          this.dependentValues = subcategoryOptions;
-      }
-      else if(error) {
-          this.error = JSON.stringify(error);
-      }
+      this.dependentValues = subcategoryOptions;
+    } else if(error) {
+      this.error = JSON.stringify(error);
+    }
   }
 
   handleCategoryChange(event) {
-      this.selectedCategory = event.target.value;
-      this.isEmpty = false;
-      let dependValues = [];
+    this.selectedCategory = event.target.value;
+    this.isEmpty = false;
+    let dependValues = [];
 
-      this.dispatchCategoryChangeEvent();
+    this.dispatchCategoryChangeEvent();
 
-      if(this.selectedCategory) {
-          if(this.selectedCategory === '--All--') {
-              this.isEmpty = true;
-              dependValues = [{label:'--All--', value:'--All--'}];
-              this.selectedCategory = '--All--';
-              this.selectedSubcategory = '--All--';
-              this.dispatchSubcategoryChangeEvent();
-              return;
-          }
+    if(this.selectedCategory) {
 
-          dependValues = [{label:'--All--', value:'--All--'}];
-          this.totalDependentValues.forEach(conValues => {
-              if(conValues.validFor[0] === this.controlValues[this.selectedCategory]) {
-                  dependValues.push({
-                      label: conValues.label,
-                      value: conValues.value
-                  })
-              }
-          })
-
-          this.dependentValues = dependValues;
-          this.selectedSubcategory = '--All--';
-          this.dispatchSubcategoryChangeEvent();
+      if(this.selectedCategory === '--All--') {
+        this.isEmpty = true;
+        dependValues = [{label:'--All--', value:'--All--'}];
+        this.selectedCategory = '--All--';
+        this.selectedSubcategory = '--All--';
+        this.dispatchSubcategoryChangeEvent();
+        return;
       }
+
+      dependValues = [{label:'--All--', value:'--All--'}];
+      this.totalDependentValues.forEach(conValues => {
+        if(conValues.validFor[0] === this.controlValues[this.selectedCategory]) {
+          dependValues.push({
+            label: conValues.label,
+            value: conValues.value
+          })
+        }
+      })
+
+      this.dependentValues = dependValues;
+      this.selectedSubcategory = '--All--';
+      this.dispatchSubcategoryChangeEvent();
+    }
   }
 
   handleSubcategoryChange(event) {
-      this.selectedSubcategory = event.target.value;
+    this.selectedSubcategory = event.target.value;
+    this.dispatchSubcategoryChangeEvent();
+  }
 
-      this.dispatchSubcategoryChangeEvent();
+  amountSelected(event) {
+    this.clearButtons();
+    event.target.variant = 'brand';
+
+    this.dispatchAmountItemsEvent(+event.target.value);
+  }
+
+  clearButtons() {
+    const buttons = Array.from(
+      this.template.querySelectorAll('lightning-button')
+    );
+    buttons.forEach((button) => {
+      button.variant = null;
+    });
   }
 
   dispatchCategoryChangeEvent() {
     const selectedEvent = new CustomEvent('categorychange', {
-        detail: this.selectedCategory,
+      detail: this.selectedCategory,
     });
     this.dispatchEvent(selectedEvent);
   }
 
   dispatchSubcategoryChangeEvent() {
     const selectedEvent = new CustomEvent('subcategorychange', {
-        detail: this.selectedSubcategory,
+      detail: this.selectedSubcategory,
     });
     this.dispatchEvent(selectedEvent);
   }
 
   dispatchAmountItemsEvent(amount) {
     const selectedEvent = new CustomEvent('amountchange', {
-        detail: amount,
+      detail: amount,
     });
     this.dispatchEvent(selectedEvent);
   }
-
-  amountSelected(event) {
-      this.clearButtons();
-      event.target.variant = 'brand';
-
-      this.dispatchAmountItemsEvent(+event.target.value);
-  }
-
-  clearButtons() {
-      const buttons = Array.from(
-        this.template.querySelectorAll('lightning-button')
-      );
-      buttons.forEach((button) => {
-          button.variant = null;
-      })
-  }
-
 }

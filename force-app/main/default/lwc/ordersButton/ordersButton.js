@@ -11,5 +11,4 @@ export default class OrdersButton extends LightningElement {
   closeModal() {
     this.isOrdersModal = false;
   }
-
 }

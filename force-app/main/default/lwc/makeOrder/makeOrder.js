@@ -12,14 +12,18 @@ import CLOSE_DATE_FIELD from '@salesforce/schema/Dish_Order__c.Closed_Date__c';
 export default class MakeOrder extends LightningElement {
 
   SUCCESS_TITLE = 'Success';
-  SUCCESS_MESSAGE = 'Successfully submitted order';
   SUCCESS_VARIANT = 'success';
+  SUCCESS_MESSAGE = 'Successfully submitted order';
 
   ERROR_TITLE = 'Error';
-  ERROR_MESSAGE = 'Error during submitting order';
   ERROR_VARIANT = 'error';
-
+  ERROR_MESSAGE = 'Error during submitting order';
   ERROR_EMPTY_ORDER = 'Can\' make empty order';
+
+  WARNING_TITLE = 'Warning';
+  WARNING_VARIANT = 'warning';
+  DONT_SPECIFY_RECEIVE = 'Please, specify receive method';
+  SPECIFY_DELIVERY_ADDRESS = 'Please, specify delivery address';
 
   DELIVERY_CHOISE = 'delivery';
 
@@ -31,25 +35,17 @@ export default class MakeOrder extends LightningElement {
 
   value = '';
 
-  get options() {
-    return [
-        { label: 'Pickup', value: 'pickup' },
-        { label: 'Home delivery', value: 'delivery' },
-    ];
-  }
-
   error;
 
-  closeModal() {
-    const selectedEvent = new CustomEvent('closemodal', {
-      detail: false,
-    });
-    this.dispatchEvent(selectedEvent);
+  get options() {
+    return [
+      { label: 'Pickup', value: 'pickup' },
+      { label: 'Home delivery', value: 'delivery' },
+    ];
   }
 
   handleReceive(event) {
     this.deliveryValue = event.detail.value;
-    //const selectedOption = event.detail.value;
     this.isDelivery = this.deliveryValue == this.DELIVERY_CHOISE;
   }
 
@@ -62,6 +58,7 @@ export default class MakeOrder extends LightningElement {
     }
 
     if(this.deliveryValue == '') {
+      this.showToast(this.WARNING_TITLE, this.DONT_SPECIFY_RECEIVE, this.WARNING_VARIANT);
       return;
     }
 
@@ -75,6 +72,12 @@ export default class MakeOrder extends LightningElement {
     if(this.isDelivery) {
       const input = this.template.querySelector('lightning-input')
       const value = input.value;
+
+      if(value == '') {
+        this.showToast(this.WARNING_TITLE, this.SPECIFY_DELIVERY_ADDRESS, this.WARNING_VARIANT);
+        return;
+      }
+
       fields[DELIVERY_ADDRESS_FIELD.fieldApiName] = value;
       input.value = ''
     }
@@ -101,4 +104,10 @@ export default class MakeOrder extends LightningElement {
     this.dispatchEvent(notification);
   }
 
+  closeModal() {
+    const selectedEvent = new CustomEvent('closemodal', {
+      detail: false,
+    });
+    this.dispatchEvent(selectedEvent);
+  }
 }

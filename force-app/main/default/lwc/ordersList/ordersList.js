@@ -6,8 +6,9 @@ export default class OrdersList extends LightningElement {
   FILTER_ALL = '--All--';
 
   @track totalPrice;
-  orders;
   @track filteredOrders= [];
+
+  orders;
   error;
 
   filterStatus = this.FILTER_ALL;
@@ -15,10 +16,15 @@ export default class OrdersList extends LightningElement {
   filterDish = this.FILTER_ALL;
 
   columns = [
+    {label: 'Name', fieldName: 'Name', hideDefaultActions: true},
     {label: 'Date', fieldName: 'Closed_Date__c', hideDefaultActions: true},
     {label: 'Status', fieldName: 'Status__c', hideDefaultActions: true},
     {label: 'Price', fieldName: 'Total_Price__c', type: 'currency', hideDefaultActions: true}
   ];
+
+  connectedCallback() {
+    this.loadOldOrders();
+  }
 
   get isEmpty() {
     return this.orders.length == 0;
@@ -26,17 +32,6 @@ export default class OrdersList extends LightningElement {
 
   get isEmptyFilter() {
     return this.filteredOrders.length == 0;
-  }
-
-  connectedCallback() {
-    this.loadOldOrders();
-  }
-
-  closeModal() {
-    const selectedEvent = new CustomEvent('closemodal', {
-      detail: false,
-    });
-    this.dispatchEvent(selectedEvent);
   }
 
   loadOldOrders() {
@@ -104,4 +99,10 @@ export default class OrdersList extends LightningElement {
     this.solveTotalPrice();
   }
 
+  closeModal() {
+    const selectedEvent = new CustomEvent('closemodal', {
+      detail: false,
+    });
+    this.dispatchEvent(selectedEvent);
+  }
 }
