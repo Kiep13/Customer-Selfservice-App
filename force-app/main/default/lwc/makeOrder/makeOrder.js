@@ -79,7 +79,7 @@ export default class MakeOrder extends LightningElement {
       }
 
       fields[DELIVERY_ADDRESS_FIELD.fieldApiName] = value;
-      input.value = ''
+      input.value = '';
     }
 
     const recordInput = { fields };

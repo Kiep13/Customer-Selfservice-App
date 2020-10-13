@@ -6,6 +6,11 @@
         <label>Bakery</label>
     </customValue>
     <customValue>
+        <fullName>Salads</fullName>
+        <default>false</default>
+        <label>Salads</label>
+    </customValue>
+    <customValue>
         <fullName>Garnishes</fullName>
         <default>false</default>
         <label>Garnishes</label>
@@ -14,11 +19,6 @@
         <fullName>Main course</fullName>
         <default>false</default>
         <label>Main course</label>
-    </customValue>
-    <customValue>
-        <fullName>Desserts</fullName>
-        <default>false</default>
-        <label>Desserts</label>
     </customValue>
     <customValue>
         <fullName>Snacks</fullName>
@@ -44,6 +44,11 @@
         <fullName>Soups</fullName>
         <default>false</default>
         <label>Soups</label>
+    </customValue>
+    <customValue>
+        <fullName>Desserts</fullName>
+        <default>false</default>
+        <label>Desserts</label>
     </customValue>
     <customValue>
         <fullName>Drinks</fullName>

@@ -41,13 +41,10 @@ export default class CurrentOrder extends LightningElement {
     .then(result => {
       this.order = result;
       this.loadOrderItems();
-      setTimeout(() => {
-        this.publishMessage();
-      }, 5000);
+      this.publishMessage();
     })
     .catch(error => {
       this.error = error;
-      console.log(error);
     });
   }
 
@@ -60,7 +57,6 @@ export default class CurrentOrder extends LightningElement {
       .catch(error => {
         this.error = error;
         this.resolveTotalPrice();
-        console.log(error);
       });
   }
 
@@ -68,11 +64,9 @@ export default class CurrentOrder extends LightningElement {
     getOrderItemById({id: id})
     .then(result => {
       this.orderItems.push(result);
-      console.log(this.orderItems);
     })
     .catch(error => {
       this.error = error;
-      console.log(error);
     });
   }
 
@@ -112,7 +106,6 @@ export default class CurrentOrder extends LightningElement {
       })
       .catch(error => {
         this.error = error;
-        console.log(error);
       });
   }
 

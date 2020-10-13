@@ -12,6 +12,18 @@
         <restricted>true</restricted>
         <valueSetName>DishSubcategories</valueSetName>
         <valueSettings>
+            <controllingFieldValue>Salads</controllingFieldValue>
+            <valueName>Vegetable</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Salads</controllingFieldValue>
+            <valueName>Meaty</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Salads</controllingFieldValue>
+            <valueName>Lungs</valueName>
+        </valueSettings>
+        <valueSettings>
             <controllingFieldValue>Bakery</controllingFieldValue>
             <valueName>Bread</valueName>
         </valueSettings>

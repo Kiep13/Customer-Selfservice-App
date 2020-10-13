@@ -20,6 +20,11 @@ export default class MenuList extends LightningElement {
   @track amountPages;
   @track itemsOnPage = 6;
 
+  @track isFirstDisabled = true;
+  @track isPreviousDisabled = true;
+  @track isNextDisabled = true;
+  @track isLastDisabled = true;
+
   isModalOpen = false;
 
   filterCategory = this.FILTER_ALL;
@@ -51,9 +56,11 @@ export default class MenuList extends LightningElement {
   resolveDisplayedDishes() {
     const filteredDishes = this.filterDishes();
     this.amountPages = Math.ceil(filteredDishes.length / this.itemsOnPage);
+    console.log(this.amountPages);
     this.displayesDishes = filteredDishes.filter((item, index) => {
       return index >= (this.currentPage-1) * this.itemsOnPage && index < (this.currentPage) * this.itemsOnPage;
     });
+    this.repaintPaginationButtons();
   }
 
   filterDishes() {
@@ -74,11 +81,6 @@ export default class MenuList extends LightningElement {
     });
   }
 
-  changePage(event) {
-    this.currentPage = event.detail;
-    this.resolveDisplayedDishes();
-  }
-
   categoryChange(event) {
     this.filterCategory = event.detail;
   }
@@ -97,6 +99,48 @@ export default class MenuList extends LightningElement {
   handleChoose(event) {
     this.dishId = event.detail;
     this.isModalOpen = true;
+  }
+
+  clickFirstPage() {
+    this.currentPage = 1;
+    this.resolveDisplayedDishes();
+  }
+
+  clickNextPage() {
+    if(this.currentPage >= this.amountPages) return;
+
+    this.currentPage++;
+    this.resolveDisplayedDishes();
+  }
+
+  clickPreviousPage() {
+    if(this.currentPage == 1) return;
+
+    this.currentPage--;
+    this.resolveDisplayedDishes();
+  }
+
+  clickLastPage() {
+    this.currentPage = this.amountPages;
+    this.resolveDisplayedDishes();
+  }
+
+  repaintPaginationButtons() {
+    if(this.currentPage == 1) {
+      this.isFirstDisabled = true;
+      this.isPreviousDisabled = true;
+    } else {
+      this.isFirstDisabled = false;
+      this.isPreviousDisabled = false;
+    }
+
+    if(this.currentPage >= this.amountPages) {
+      this.isNextDisabled = true;
+      this.isLastDisabled = true;
+    } else {
+      this.isNextDisabled = false;
+      this.isLastDisabled = false;
+    }
   }
 
   closeModal() {

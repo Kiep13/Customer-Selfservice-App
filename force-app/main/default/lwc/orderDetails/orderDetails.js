@@ -27,7 +27,7 @@ export default class OrderDetails extends LightningElement {
       orderItem.Amount__c = item.Amount__c;
       orderItem.Item_Price__c = item.Item_Price__c;
       this.orderItems.push(orderItem);
-    })
+    });
   }
 
   get isEmpty() {
