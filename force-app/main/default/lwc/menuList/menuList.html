@@ -31,15 +31,10 @@
 			</template>
 		</div>
 
-		<div class="slds-text-align_center">
-			<lightning-button-group>
-				<lightning-button label="First" onclick={clickFirstPage} disabled={isFirstDisabled}></lightning-button>
-				<lightning-button label="Previous" onclick={clickPreviousPage} disabled={isPreviousDisabled}></lightning-button>
-				<lightning-button label={currentPage}></lightning-button>
-				<lightning-button label="Next" onclick={clickNextPage} disabled={isNextDisabled}></lightning-button>
-				<lightning-button label="Last" onclick={clickLastPage} disabled={isLastDisabled}></lightning-button>
-			</lightning-button-group>
-		</div>
+		<c-pagination current-page={currentPage} 
+									amount-pages={amountPages}
+									onpagechanged={changePage}>
+		</c-pagination>
 
   </lightning-card>   
 

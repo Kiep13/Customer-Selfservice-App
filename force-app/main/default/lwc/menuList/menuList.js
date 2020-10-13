@@ -17,13 +17,8 @@ export default class MenuList extends LightningElement {
   @track displayesDishes = [];
 
   @track currentPage = 1;
-  @track amountPages = 0;
+  @track amountPages;
   @track itemsOnPage = 6;
-
-  @track isFirstDisabled = true;
-  @track isPreviousDisabled = true;
-  @track isNextDisabled = true;
-  @track isLastDisabled = true;
 
   isModalOpen = false;
 
@@ -59,7 +54,6 @@ export default class MenuList extends LightningElement {
     this.displayesDishes = filteredDishes.filter((item, index) => {
       return index >= (this.currentPage-1) * this.itemsOnPage && index < (this.currentPage) * this.itemsOnPage;
     });
-    this.repaintPaginationButtons();
   }
 
   filterDishes() {
@@ -80,50 +74,13 @@ export default class MenuList extends LightningElement {
     });
   }
 
-  clickFirstPage() {
-    this.currentPage = 1;
-    this.resolveDisplayedDishes();
-  }
-
-  clickNextPage() {
-    if(this.currentPage >= this.amountPages) return;
-
-    this.currentPage++;
-    this.resolveDisplayedDishes();
-  }
-
-  clickPreviousPage() {
-    if(this.currentPage == 1) return;
-
-    this.currentPage--;
-    this.resolveDisplayedDishes();
-  }
-
-  clickLastPage() {
-    this.currentPage = this.amountPages;
+  changePage(event) {
+    this.currentPage = event.detail;
     this.resolveDisplayedDishes();
   }
 
   categoryChange(event) {
     this.filterCategory = event.detail;
-  }
-
-  repaintPaginationButtons() {
-    if(this.currentPage == 1) {
-      this.isFirstDisabled = true;
-      this.isPreviousDisabled = true;
-    } else {
-      this.isFirstDisabled = false;
-      this.isPreviousDisabled = false;
-    }
-
-    if(this.currentPage >= this.amountPages) {
-      this.isNextDisabled = true;
-      this.isLastDisabled = true;
-    } else {
-      this.isNextDisabled = false;
-      this.isLastDisabled = false;
-    }
   }
 
   subcategoryChange(event) {
