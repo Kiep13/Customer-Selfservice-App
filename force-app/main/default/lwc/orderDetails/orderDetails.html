@@ -16,6 +16,10 @@
         <div class="slds-modal__content modal_content">
 
             <div class="modal_form detailsCard" id="modal-content-id-1">
+
+                <template if:true={loading}>
+                    <c-spinner></c-spinner>
+                </template>
     
                 <template if:true={orderItems}>
                   

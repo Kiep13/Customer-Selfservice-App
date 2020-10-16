@@ -15,6 +15,7 @@ export default class MenuList extends LightningElement {
   @track orderId;
 
   @track displayesDishes = [];
+  @track loading = false;
 
   @track currentPage = 1;
   @track amountPages;
@@ -34,6 +35,7 @@ export default class MenuList extends LightningElement {
   error;
 
   connectedCallback() {
+    this.loading = true;
     this.loadMenu();
     this.subscribeToMessageChannel();
   }
@@ -47,9 +49,11 @@ export default class MenuList extends LightningElement {
     .then(result => {
       this.dishes = result;
       this.resolveDisplayedDishes();
+      this.loading = false;
     })
     .catch(error => {
       this.error = error;
+      this.loading = false;
     });
   }
 

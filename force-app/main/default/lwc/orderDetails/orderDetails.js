@@ -4,6 +4,7 @@ export default class OrderDetails extends LightningElement {
   
   @api items;
   @track orderItems = [];
+  @track loading = false;
 
   actions = [
     { label: 'Delete', name: 'delete' }
@@ -28,6 +29,7 @@ export default class OrderDetails extends LightningElement {
       orderItem.Item_Price__c = item.Item_Price__c;
       this.orderItems.push(orderItem);
     });
+    this.loading = false;
   }
 
   get isEmpty() {

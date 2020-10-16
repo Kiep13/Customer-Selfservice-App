@@ -19,6 +19,7 @@ export default class CurrentOrder extends LightningElement {
   @track totalPrice = 0.0;
 
   @track order;
+  @track loading = false;
   error;
   orderItems = [];
 
@@ -26,6 +27,7 @@ export default class CurrentOrder extends LightningElement {
   isConfirmModalOpen = false;
 
   connectedCallback() {
+    this.loading = true;
     checkOrderExistence()
       .then(result => {
         this.loadOrder();
@@ -42,9 +44,11 @@ export default class CurrentOrder extends LightningElement {
       this.order = result;
       this.loadOrderItems();
       this.publishMessage();
+      this.loading = false;
     })
     .catch(error => {
       this.error = error;
+      this.loading = false;
     });
   }
 
@@ -99,6 +103,7 @@ export default class CurrentOrder extends LightningElement {
   }
 
   submitOrder() {
+    this.loading = true;
     this.closeConfirmModal();
     checkOrderExistence()
       .then(result => {

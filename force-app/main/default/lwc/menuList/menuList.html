@@ -1,36 +1,44 @@
 <template>
 
   <lightning-card title="Menu" icon-name="utility:food_and_drink">
+
 		<div class="slds-card__body_inner">
 
-			<template if:true={dishes}>
+			<template if:true={loading}>
+				<c-spinner></c-spinner>
+			</template>
 
-				<c-menu-list-options oncategorychange={categoryChange} 
-														 onsubcategorychange={subcategoryChange}
-														 onamountchange={amountChange}></c-menu-list-options>
+			<template if:false={loading}>
+				<template if:true={dishes}>
+	
+					<c-menu-list-options oncategorychange={categoryChange} 
+															 onsubcategorychange={subcategoryChange}
+															 onamountchange={amountChange}></c-menu-list-options>
+		
+					<lightning-layout multiple-rows="true" pull-to-boundary="small">
+						<template for:each={displayesDishes} for:item="dish">
+							<lightning-layout-item key={dish.Id}  size="4" class="slds-var-p-around_x-small">
+								<c-menu-tile dish={dish} onchoosed={handleChoose}></c-menu-tile>
+							</lightning-layout-item>
+						</template>
+					</lightning-layout>
+				</template>
+					
+				<template if:true={dishesLength}>
+					<div class="slds-text-align_center slds-var-m-around_medium">
+						<p>No items to display</p>
+					</div>	
+				</template>
+					
+				<template if:true={error}>
+					<div class="slds-text-color_error">
+						An error occurred while loading the menu
+					</div>
+				</template>
+			</template>
 
-				<lightning-layout multiple-rows="true" pull-to-boundary="small">
-					<template for:each={displayesDishes} for:item="dish">
-            <lightning-layout-item key={dish.Id}  size="4" class="slds-var-p-around_x-small">
-              <c-menu-tile dish={dish} onchoosed={handleChoose}></c-menu-tile>
-            </lightning-layout-item>
-					</template>
-				</lightning-layout>
-			</template>
-			
-			<template if:true={dishesLength}>
-				<div class="slds-text-align_center slds-var-m-around_medium">
-					<p>No items to display</p>
-				</div>	
-			</template>
-      
-			<template if:true={error}>
-				<div class="slds-text-color_error">
-					An error occurred while loading the menu
-				</div>
-			</template>
 		</div>
-
+	
 		<div class="slds-text-align_center">
 			<lightning-button-group>
 				<lightning-button label="First" onclick={clickFirstPage} disabled={isFirstDisabled}></lightning-button>

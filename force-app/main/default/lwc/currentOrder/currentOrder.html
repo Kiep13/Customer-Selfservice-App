@@ -2,22 +2,34 @@
   <lightning-card
     variant="narrow"
     icon-name="utility:work_order_type">
+
+  <template if:true={loading}>
+    <c-spinner></c-spinner>
+  </template>
+
+  <template if:false={loading}>
+
     <h1 slot="title">Current order</h1>
     <p class="slds-var-p-horizontal_small">Order price: {totalPrice}$</p>
     <div class="slds-text-align_center modal_buttons">
       <button class="slds-button slds-button_neutral" title="Order details" onclick={openDetailsModal}>Order details</button>
       <button class="slds-button slds-button_brand" title="Make an order" onclick={openConfirmModal}>Make an order</button>
     </div>
-  </lightning-card>
 
-  <template if:true={isDetailsModalOpen}>
-    <c-order-details items={orderItems} 
-                     onclosemodal={closeDetailsModal} 
-                     onmakeorder={makeOrder}
-                     ondeleted={deleteOrderItem}></c-order-details>
+    <template if:true={isDetailsModalOpen}>
+      <c-order-details items={orderItems} 
+                       onclosemodal={closeDetailsModal} 
+                       onmakeorder={makeOrder}
+                       ondeleted={deleteOrderItem}></c-order-details>
+    </template>
+  
+    
   </template>
+
+  </lightning-card>
 
   <template if:true={isConfirmModalOpen} >
     <c-make-order order={order} total-price={totalPrice} onclosemodal={closeConfirmModal} onsubmit={submitOrder}></c-make-order>
   </template>
+  
 </template>

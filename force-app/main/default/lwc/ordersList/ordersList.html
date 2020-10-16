@@ -16,48 +16,52 @@
           <div class="slds-modal__content modal_content">
   
               <div class="modal_form orders_modal" id="modal-content-id-1">
-      
-                  <template if:true={orders}>
+
+                <template if:true={loading}>
+                  <c-spinner></c-spinner>
+                </template>
+
+                <template if:true={orders}>
                     
-                    <template if:false={isEmpty}>
+                  <template if:false={isEmpty}>
 
-                      <c-order-list-options orders={orders}
-                                            onstatuschange={filterStatusChange}
-                                            ondatechange={filterDateChange}
-                                            ondishchange={filterDishChange}>
-                                        </c-order-list-options>
+                    <c-order-list-options orders={orders}
+                                          onstatuschange={filterStatusChange}
+                                          ondatechange={filterDateChange}
+                                          ondishchange={filterDishChange}>
+                                      </c-order-list-options>
 
-                       <template if:false={isEmptyFilter}>
-                         <p>Dishes you ordered:</p>
+                      <template if:false={isEmptyFilter}>
+                        <p>Dishes you ordered:</p>
 
-                         <lightning-datatable key-field="Id"
-                                              data={filteredOrders}
-                                              columns={columns}
-                                              hide-checkbox-column>
-                         </lightning-datatable>
+                        <lightning-datatable key-field="Id"
+                                             data={filteredOrders}
+                                             columns={columns}
+                                             hide-checkbox-column>
+                        </lightning-datatable>
                 
-                         <p class="slds-var-p-horizontal_small">Total orders price: {totalPrice}$</p>
-                       </template> 
+                        <p class="slds-var-p-horizontal_small">Total orders price: {totalPrice}$</p>
+                      </template> 
 
-                       <template if:true={isEmptyFilter}>
-                         No items to display
-                       </template>
+                      <template if:true={isEmptyFilter}>
+                        No items to display
+                      </template>
 
-                    </template>
-
-                    <template if:true={isEmpty}>
-                        Your order history is clear
-                    </template>
-
-                    <div class="slds-text-align_center modal_buttons">
-                        <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Close</button>
-                    </div>
-  
                   </template>
-  
-                  <template if:true={error}>
-                      <p>Error during attempt to get old orders</p>
+
+                  <template if:true={isEmpty}>
+                      Your order history is clear
                   </template>
+
+                </template>
+
+                <template if:true={error}>
+                  <p>Error during attempt to get old orders</p>
+                </template>
+
+                <div class="slds-text-align_center modal_buttons">
+                  <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Close</button>
+                </div>
   
               </div>
   
