@@ -2,29 +2,29 @@
   <div class="slds-grid slds-gutters">
 
     <div class="slds-col slds-size_1-of-4">
-        <p>Status</p>
+        <p>{label.status}</p>
         <lightning-combobox name="status"
                             onchange={handleStatusChange} 
                             options={statusValues} 
-                            placeholder="--All--" 
+                            placeholder={all}
                             value={selectedStatus}></lightning-combobox>
     </div> 
 
     <div class="slds-col slds-size_1-of-4">
-        <p>Date</p>
+        <p>{label.date}</p>
         <lightning-combobox name="date"
                             onchange={handleDateChange} 
                             options={dateValues} 
-                            placeholder="--All--" 
+                            placeholder={all}
                             value={selectedDate}></lightning-combobox>
     </div>
 
     <div class="slds-col slds-size_2-of-4">
-        <p>Dish</p>
+        <p>{label.dish}</p>
         <lightning-combobox name="dishes"
                             onchange={handleDishChange} 
                             options={dishValues} 
-                            placeholder="--All--" 
+                            placeholder={all} 
                             value={selectedDish}></lightning-combobox>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <button class="slds-button slds-button_brand slds-button_stretch slds-container_fluid" 
-          onclick={openModal}>Orders</button>
+          onclick={openModal}>{label.orders}</button>
 
   <template if:true={isOrdersModal}>
     <c-orders-list onclosemodal={closeModal}></c-orders-list>

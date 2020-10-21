@@ -9,11 +9,11 @@
 
   <template if:false={loading}>
 
-    <h1 slot="title">Current order</h1>
-    <p class="slds-var-p-horizontal_small">Order price: {totalPrice}$</p>
+    <h1 slot="title">{label.currentOrder}</h1>
+    <p class="slds-var-p-horizontal_small">{label.orderPrice}: {displayedPrice}</p>
     <div class="slds-text-align_center modal_buttons">
-      <button class="slds-button slds-button_neutral" title="Order details" onclick={openDetailsModal}>Order details</button>
-      <button class="slds-button slds-button_brand" title="Make an order" onclick={openConfirmModal}>Make an order</button>
+      <button class="slds-button slds-button_neutral" title="Order details" onclick={openDetailsModal}>{label.orderDetails}</button>
+      <button class="slds-button slds-button_brand" title="Make an order" onclick={openConfirmModal}>{label.makeOrder}</button>
     </div>
 
     <template if:true={isDetailsModalOpen}>

@@ -1,20 +1,43 @@
 import { LightningElement, api, track } from 'lwc';
 
+import close from '@salesforce/label/c.close';
+import orderDetails from '@salesforce/label/c.orderDetails';
+import dishYouOrdered from '@salesforce/label/c.dishYouOrdered';
+import dish from '@salesforce/label/c.dish';
+import comment from '@salesforce/label/c.comment';
+import amount from '@salesforce/label/c.amount';
+import price from '@salesforce/label/c.price';
+import cancel from '@salesforce/label/c.cancel';
+import makeOrder from '@salesforce/label/c.makeOrder';
+import deleteLabel from '@salesforce/label/c.delete';
+import noElements from '@salesforce/label/c.noElements';
+import errorOrderDetails from '@salesforce/label/c.errorOrderDetails';
+
 export default class OrderDetails extends LightningElement {
   
+  label = {
+    close, 
+    orderDetails,
+    dishYouOrdered,
+    cancel,
+    makeOrder,
+    noElements,
+    errorOrderDetails
+  }
+
   @api items;
   @track orderItems = [];
   @track loading = false;
 
   actions = [
-    { label: 'Delete', name: 'delete' }
+    { label: 'Delete', name: deleteLabel }
   ];
 
   columns = [
-    {label: 'Dish', fieldName: 'Title__c', hideDefaultActions: true},
-    {label: 'Comment', fieldName: 'Comment_to_dish__c', hideDefaultActions: true},
-    {label: 'Amount', fieldName: 'Amount__c', hideDefaultActions: true},
-    {label: 'Price', fieldName: 'Item_Price__c', hideDefaultActions: true},
+    {label: dish, fieldName: 'Title__c', hideDefaultActions: true},
+    {label: comment, fieldName: 'Comment_to_dish__c', hideDefaultActions: true},
+    {label: amount, fieldName: 'Amount__c', hideDefaultActions: true},
+    {label: price, fieldName: 'Item_Price__c', type: 'currency', hideDefaultActions: true},
     {type: 'action', typeAttributes: { rowActions: this.actions, menuAlignment: 'right' }}
   ];
 

@@ -1,6 +1,6 @@
 <template>
 
-  <lightning-card title="Menu" icon-name="utility:food_and_drink">
+  <lightning-card title={label.menu} icon-name="utility:food_and_drink">
 
 		<div class="slds-card__body_inner">
 
@@ -26,13 +26,13 @@
 					
 				<template if:true={dishesLength}>
 					<div class="slds-text-align_center slds-var-m-around_medium">
-						<p>No items to display</p>
+						<p>{label.noElements}</p>
 					</div>	
 				</template>
 					
 				<template if:true={error}>
 					<div class="slds-text-color_error">
-						An error occurred while loading the menu
+						{label.errorLoadingMenu}
 					</div>
 				</template>
 			</template>
@@ -41,11 +41,11 @@
 	
 		<div class="slds-text-align_center">
 			<lightning-button-group>
-				<lightning-button label="First" onclick={clickFirstPage} disabled={isFirstDisabled}></lightning-button>
-				<lightning-button label="Previous" onclick={clickPreviousPage} disabled={isPreviousDisabled}></lightning-button>
+				<lightning-button label={label.firstPage} onclick={clickFirstPage} disabled={isFirstDisabled}></lightning-button>
+				<lightning-button label={label.previousPage}  onclick={clickPreviousPage} disabled={isPreviousDisabled}></lightning-button>
 				<lightning-button label={currentPage}></lightning-button>
-				<lightning-button label="Next" onclick={clickNextPage} disabled={isNextDisabled}></lightning-button>
-				<lightning-button label="Last" onclick={clickLastPage} disabled={isLastDisabled}></lightning-button>
+				<lightning-button label={label.nextPage}  onclick={clickNextPage} disabled={isNextDisabled}></lightning-button>
+				<lightning-button label={label.lastPage}  onclick={clickLastPage} disabled={isLastDisabled}></lightning-button>
 			</lightning-button-group>
 		</div>
 

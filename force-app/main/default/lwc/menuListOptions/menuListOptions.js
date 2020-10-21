@@ -4,7 +4,20 @@ import { getPicklistValuesByRecordType } from 'lightning/uiObjectInfoApi';
 import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 import DISH_OBJECT from '@salesforce/schema/Dish__c';
 
+import category from '@salesforce/label/c.category';
+import subcategory from '@salesforce/label/c.subcategory';
+import itemsOnPage from '@salesforce/label/c.itemsOnPage';
+import all from '@salesforce/label/c.all';
+
 export default class MenuListOptions extends LightningElement {
+
+  all = all;
+
+  label = {
+    category, 
+    subcategory,
+    itemsOnPage
+  }
 
   @track controllingValues = [];
   @track dependentValues = [];
@@ -26,7 +39,7 @@ export default class MenuListOptions extends LightningElement {
     if(data) {
       this.error = null;
 
-      let categoryOptions = [{label:'--All--', value:'--All--'}];
+      let categoryOptions = [{label: all, value:'--All--'}];
 
       data.picklistFieldValues.Category__c.values.forEach(key => {
         categoryOptions.push({
@@ -37,7 +50,7 @@ export default class MenuListOptions extends LightningElement {
 
       this.controllingValues = categoryOptions;
 
-      let subcategoryOptions = [{label:'--All--', value:'--All--'}];
+      let subcategoryOptions = [{label: all, value:'--All--'}];
 
       this.controlValues = data.picklistFieldValues.Subcategory__c.controllerValues;
       this.totalDependentValues = data.picklistFieldValues.Subcategory__c.values;
@@ -66,14 +79,14 @@ export default class MenuListOptions extends LightningElement {
 
       if(this.selectedCategory === '--All--') {
         this.isEmpty = true;
-        dependValues = [{label:'--All--', value:'--All--'}];
+        dependValues = [{label:all, value:'--All--'}];
         this.selectedCategory = '--All--';
         this.selectedSubcategory = '--All--';
         this.dispatchSubcategoryChangeEvent();
         return;
       }
 
-      dependValues = [{label:'--All--', value:'--All--'}];
+      dependValues = [{label:all, value:'--All--'}];
       this.totalDependentValues.forEach(conValues => {
         if(conValues.validFor[0] === this.controlValues[this.selectedCategory]) {
           dependValues.push({

@@ -9,25 +9,58 @@ import DELIVERY_FIELD from '@salesforce/schema/Dish_Order__c.Delivery__c';
 import DELIVERY_ADDRESS_FIELD from '@salesforce/schema/Dish_Order__c.Delivery_address__c';
 import CLOSE_DATE_FIELD from '@salesforce/schema/Dish_Order__c.Closed_Date__c';
 
+import LOCALE from '@salesforce/i18n/locale';
+import CURRENCY from '@salesforce/i18n/currency';
+
+import orderConfirmation from '@salesforce/label/c.orderConfirmation';
+import totalOrderPrice from '@salesforce/label/c.totalOrderPrice';
+import receiveMethod from '@salesforce/label/c.receiveMethod';
+import pickup from '@salesforce/label/c.pickup';
+import homeDelivery from '@salesforce/label/c.homeDelivery';
+import specifyAddress from '@salesforce/label/c.specifyAddress';
+import cancel from '@salesforce/label/c.cancel';
+import confirmOrder from '@salesforce/label/c.confirmOrder';
+import close from '@salesforce/label/c.close';
+import errorSubmitOrder from '@salesforce/label/c.errorSubmitOrder';
+import warning from '@salesforce/label/c.warning';
+import error from '@salesforce/label/c.error';
+import success from '@salesforce/label/c.success';
+import succesSubmitOrder from '@salesforce/label/c.succesSubmitOrder';
+import errorEmptyOrder from '@salesforce/label/c.errorEmptyOrder';
+import warningReceiveMethod from '@salesforce/label/c.warningReceiveMethod';
+import warningSpecifyAddress from '@salesforce/label/c.warningSpecifyAddress';
+
 export default class MakeOrder extends LightningElement {
 
-  SUCCESS_TITLE = 'Success';
+  label = {
+    orderConfirmation,
+    totalOrderPrice,
+    receiveMethod,
+    specifyAddress,
+    cancel,
+    confirmOrder,
+    close,
+    errorSubmitOrder
+  }
+
+  SUCCESS_TITLE = success;
+  SUCCESS_MESSAGE = succesSubmitOrder;
   SUCCESS_VARIANT = 'success';
-  SUCCESS_MESSAGE = 'Successfully submitted order';
 
-  ERROR_TITLE = 'Error';
+  ERROR_TITLE = error;
   ERROR_VARIANT = 'error';
-  ERROR_MESSAGE = 'Error during submitting order';
-  ERROR_EMPTY_ORDER = 'Can\' make empty order';
+  ERROR_MESSAGE = errorSubmitOrder;
+  ERROR_EMPTY_ORDER = errorEmptyOrder;
 
-  WARNING_TITLE = 'Warning';
+  WARNING_TITLE = warning;
   WARNING_VARIANT = 'warning';
-  DONT_SPECIFY_RECEIVE = 'Please, specify receive method';
-  SPECIFY_DELIVERY_ADDRESS = 'Please, specify delivery address';
+  DONT_SPECIFY_RECEIVE = warningReceiveMethod;
+  SPECIFY_DELIVERY_ADDRESS = warningSpecifyAddress;
 
   DELIVERY_CHOISE = 'delivery';
 
   @api totalPrice;
+  @track displayedPrice = 0.0;
   @api order;
 
   @track isDelivery = false;
@@ -37,10 +70,18 @@ export default class MakeOrder extends LightningElement {
 
   error;
 
+  connectedCallback() {
+    this.displayedPrice = new Intl.NumberFormat(LOCALE, {
+      style: 'currency',
+      currency: CURRENCY,
+      currencyDisplay: 'symbol'
+    }).format(this.totalPrice);
+  }
+
   get options() {
     return [
-      { label: 'Pickup', value: 'pickup' },
-      { label: 'Home delivery', value: 'delivery' },
+      { label: pickup, value: 'pickup' },
+      { label: homeDelivery, value: 'delivery' },
     ];
   }
 
@@ -52,6 +93,7 @@ export default class MakeOrder extends LightningElement {
   makeOrder() {
     let date = new Date();
 
+    console.log(this.totalPrice);
     if(this.totalPrice <= 0) {
       this.showToast(this.ERROR_TITLE, this.ERROR_EMPTY_ORDER, this.ERROR_VARIANT);
       return;

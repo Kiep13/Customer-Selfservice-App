@@ -1,24 +1,24 @@
 <template>
   <div class="slds-grid slds-gutters">
     <div class="slds-col slds-size_1-of-4">
-        <p>Category</p>
+        <p>{label.category}</p>
         <lightning-combobox name="category" 
                             onchange={handleCategoryChange} 
                             options={controllingValues} 
-                            placeholder="--All--" 
+                            placeholder={all}
                             value={selectedCategory}></lightning-combobox>
     </div>
     <div class="slds-col slds-size_1-of-4">
-        <p>Subcategory</p>
+        <p>{label.subcategory}</p>
         <lightning-combobox name="subcategory"
                             onchange={handleSubcategoryChange} 
                             options={dependentValues} 
-                            placeholder="--All--" 
+                            placeholder={all}
                             value={selectedSubcategory}
                             disabled={isEmpty}></lightning-combobox>
     </div>
     <div class="slds-col slds-size_1-of-4">
-      <p>Items on page</p>
+      <p>{label.itemsOnPage}</p>
       <lightning-button-group>
         <lightning-button variant="brand" label="6" value="6" onclick={amountSelected}></lightning-button>
         <lightning-button label="12" value="12" onclick={amountSelected}></lightning-button>

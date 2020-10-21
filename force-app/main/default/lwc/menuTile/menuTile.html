@@ -8,18 +8,18 @@
         </div>
         
         <p class="slds-var-m-bottom_xx-small"><span class="dish_details">
-          Category: </span>{dish.Category__c}, {dish.Subcategory__c}
+          {label.category}: </span>{dish.Category__c}, {dish.Subcategory__c}
         </p>
         <template if:true={dish.Description__c}>
-          <p class="slds-var-m-bottom_xx-small"><span class="dish_details">Description: </span>{dish.Description__c}</p>
+          <p class="slds-var-m-bottom_xx-small"><span class="dish_details">{label.description}: </span>{dish.Description__c}</p>
         </template>
-        <p class="slds-var-m-bottom_xx-small"><span class="dish_details">Price: </span>{dish.Price__c}$</p>
+        <p class="slds-var-m-bottom_xx-small"><span class="dish_details">{label.price}: </span>{(formattedCurrency)}</p>
       </div>
     </div>
 
     <footer class="slds-is-absolute slds-card__footer slds-text-align_center"
             style="border-top: 1px solid rgb(153, 153, 153);">
-      <button class="slds-button slds-button_neutral " onclick={handleClick}>Add to order</button>
+      <button class="slds-button slds-button_neutral " onclick={handleClick}>{label.addToOrder}</button>
     </footer>
   </article>
 </template>

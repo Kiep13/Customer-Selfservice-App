@@ -10,13 +10,28 @@ import MESSAGE_CHANNEL from "@salesforce/messageChannel/OrderItemMessage__c";
 import ORDER_MC from "@salesforce/messageChannel/OrderMessage__c";
 import { APPLICATION_SCOPE, subscribe, unsubscribe, MessageContext, publish } from 'lightning/messageService';
 
+import LOCALE from '@salesforce/i18n/locale';
+import CURRENCY from '@salesforce/i18n/currency';
+
+import currentOrder from '@salesforce/label/c.currentOrder';
+import orderPrice from '@salesforce/label/c.orderPrice';
+import orderDetails from '@salesforce/label/c.orderDetails';
+import makeOrder from '@salesforce/label/c.makeOrder';
 
 export default class CurrentOrder extends LightningElement {
+
+  label = {
+    currentOrder,
+    orderPrice,
+    orderDetails,
+    makeOrder
+  }
 
   @wire(MessageContext)
   messageContext;
 
   @track totalPrice = 0.0;
+  @track displayedPrice = 0.0;
 
   @track order;
   @track loading = false;
@@ -80,6 +95,11 @@ export default class CurrentOrder extends LightningElement {
       sum += +orderItem.Item_Price__c;
     });
     this.totalPrice = sum.toFixed(2);
+    this.displayedPrice = new Intl.NumberFormat(LOCALE, {
+      style: 'currency',
+      currency: CURRENCY,
+      currencyDisplay: 'symbol'
+    }).format(this.totalPrice);
   }
 
   deleteOrderItem(event) {

@@ -15,19 +15,48 @@ import AMOUNT_FIELD from '@salesforce/schema/Order_Item__c.Amount__c';
 import COMMENT_FIELD from '@salesforce/schema/Order_Item__c.Comment_to_dish__c';
 import ORDER_FIELD from '@salesforce/schema/Order_Item__c.Dish_Order__c';
 
+import addToOrder from '@salesforce/label/c.addToOrder';
+import dishTitle from '@salesforce/label/c.dishTitle';
+import description from '@salesforce/label/c.description';
+import price from '@salesforce/label/c.price';
+import amountPortions from '@salesforce/label/c.amountPortions';
+import comment from '@salesforce/label/c.comment';
+import cancel from '@salesforce/label/c.cancel';
+import ok from '@salesforce/label/c.ok';
+import close from '@salesforce/label/c.close';
+import errorAddOrderItem from '@salesforce/label/c.errorAddOrderItem';
+import sucessfullyAddToOrder from '@salesforce/label/c.sucessfullyAddToOrder';
+import soHungry from '@salesforce/label/c.soHungry';
+import warning from '@salesforce/label/c.warning';
+import error from '@salesforce/label/c.error';
+import success from '@salesforce/label/c.success';
+
 export default class AddOredItem extends LightningElement {
 
-  SUCCESS_TITLE = 'Success';
-  SUCCESS_MESSAGE = 'Successfully added to the order';
+  label = {
+    addToOrder,
+    dishTitle, 
+    description,
+    price,
+    amountPortions,
+    comment,
+    cancel,
+    ok,
+    close,
+    errorAddOrderItem
+  }
+
+  SUCCESS_TITLE = success;
+  SUCCESS_MESSAGE = sucessfullyAddToOrder;
   SUCCESS_VARIANT = 'success';
 
-  ERROR_TITLE = 'Error';
-  ERROR_MESSAGE = 'Error during adding new order item';
+  ERROR_TITLE = error;
+  ERROR_MESSAGE = errorAddOrderItem;
   ERROR_VARIANT = 'error';
 
-  WARNING_TITLE = 'Warning';
+  WARNING_TITLE = warning;
+  TOO_MUCH_DISHES_MESSAGE = soHungry;
   WARNING_VARIANT = 'warning';
-  TOO_MUCH_DISHES_MESSAGE = 'Are you so hungry?';
 
   @wire(MessageContext)
   messageContext;

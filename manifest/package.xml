@@ -52,5 +52,9 @@
         <members>*</members>
         <name>PermissionSet</name>
     </types>
+    <types>
+      <members>*</members>
+      <name>CustomLabels</name>
+    </types>
     <version>49.0</version>
 </Package>

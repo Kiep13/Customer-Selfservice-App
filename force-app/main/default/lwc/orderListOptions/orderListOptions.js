@@ -6,7 +6,20 @@ import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 
 import LOCALE from '@salesforce/i18n/locale';
 
+import status from '@salesforce/label/c.status';
+import date from '@salesforce/label/c.date';
+import dish from '@salesforce/label/c.dish';
+import all from '@salesforce/label/c.all';
+
 export default class OrderListOptions extends LightningElement {
+
+  all = all;
+
+  label = {
+    status,
+    date,
+    dish
+  }
 
   @api orders;
 
@@ -29,7 +42,7 @@ export default class OrderListOptions extends LightningElement {
     if(data) {
       this.error = null;
 
-      let statusOptions = [{label:'--All--', value:'--All--'}];
+      let statusOptions = [{label:all, value:'--All--'}];
 
       data.picklistFieldValues.Status__c.values.forEach(key => {
         statusOptions.push({
@@ -52,7 +65,7 @@ export default class OrderListOptions extends LightningElement {
   }
 
   buildDateArray() {
-    this.dateValues = [{label:'--All--', value:'--All--'}];
+    this.dateValues = [{label:all, value:'--All--'}];
     const setDates = new Set();
     this.orders.forEach((order) => {
       setDates.add(order.Closed_Date__c);
@@ -68,7 +81,7 @@ export default class OrderListOptions extends LightningElement {
   }
 
   buildDishArray() {
-    this.dishValues = [{label:'--All--', value:'--All--'}];
+    this.dishValues = [{label:all, value:'--All--'}];
     const setDishes = new Set();
     this.orders.forEach((order) => {
       const orderItems = order.Order_Items__r;
