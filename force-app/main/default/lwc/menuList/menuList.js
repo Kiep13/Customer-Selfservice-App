@@ -60,7 +60,6 @@ export default class MenuList extends LightningElement {
   resolveDisplayedDishes() {
     const filteredDishes = this.filterDishes();
     this.amountPages = Math.ceil(filteredDishes.length / this.itemsOnPage);
-    console.log(this.amountPages);
     this.displayesDishes = filteredDishes.filter((item, index) => {
       return index >= (this.currentPage-1) * this.itemsOnPage && index < (this.currentPage) * this.itemsOnPage;
     });

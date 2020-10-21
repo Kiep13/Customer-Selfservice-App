@@ -4,6 +4,8 @@ import ORDER_OBJECT from '@salesforce/schema/Dish_Order__c';
 import { getPicklistValuesByRecordType } from 'lightning/uiObjectInfoApi';
 import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 
+import LOCALE from '@salesforce/i18n/locale';
+
 export default class OrderListOptions extends LightningElement {
 
   @api orders;
@@ -16,6 +18,8 @@ export default class OrderListOptions extends LightningElement {
 
   @track statusValues = [];
   @track selectedStatus;
+
+  formattedDate;
 
   @wire(getObjectInfo, { objectApiName: ORDER_OBJECT })
   objectInfo;
@@ -42,6 +46,7 @@ export default class OrderListOptions extends LightningElement {
   }
 
   connectedCallback() {
+    this.formattedDate = new Intl.DateTimeFormat(LOCALE).format(new Date());
     this.buildDateArray();
     this.buildDishArray();
   }
@@ -54,8 +59,9 @@ export default class OrderListOptions extends LightningElement {
     })
 
     for (let date of setDates.values()) {
+      const formattedDate = new Intl.DateTimeFormat(LOCALE).format(new Date(date));
       this.dateValues.push({
-        label : date,
+        label : formattedDate,
         value: date
       });
     }
