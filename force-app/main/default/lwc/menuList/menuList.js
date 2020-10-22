@@ -29,7 +29,7 @@ export default class MenuList extends LightningElement {
   @wire(MessageContext)
   messageContext;
 
-  @track dishId;
+  @track dish;
   @track orderId;
 
   @track displayesDishes = [];
@@ -118,7 +118,7 @@ export default class MenuList extends LightningElement {
   }
 
   handleChoose(event) {
-    this.dishId = event.detail;
+    this.dish = event.detail;
     this.isModalOpen = true;
   }
 

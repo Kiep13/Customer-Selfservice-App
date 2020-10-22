@@ -13,7 +13,7 @@
         <template if:true={dish.Description__c}>
           <p class="slds-var-m-bottom_xx-small"><span class="dish_details">{label.description}: </span>{dish.Description__c}</p>
         </template>
-        <p class="slds-var-m-bottom_xx-small"><span class="dish_details">{label.price}: </span>{(formattedCurrency)}</p>
+        <p class="slds-var-m-bottom_xx-small"><span class="dish_details">{label.price}: </span>{formattedPrice}</p>
       </div>
     </div>
 

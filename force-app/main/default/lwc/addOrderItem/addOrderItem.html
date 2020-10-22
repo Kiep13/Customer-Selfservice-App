@@ -18,11 +18,11 @@
             <div class="modal_form" id="modal-content-id-1">
     
                 <template if:true={dish}>
-                    <p>{label.dishTitle}: {dish.fields.Title__c.value}</p>
-                    <template if:true={dish.fields.Description__c.value}>
-                        <p>{label.description}: {dish.fields.Description__c.value}</p>
+                    <p>{label.dishTitle}: {dish.Title__c}</p>
+                    <template if:true={dish.Description__c}>
+                        <p>{label.description}: {dish.Description__c}</p>
                     </template>
-                    <p>{label.price}: {dish.fields.Price__c.value}$</p>
+                    <p>{label.price}: {formattedPrice}</p>
 
                     <lightning-record-edit-form object-api-name={objectApiName}>
     

@@ -82,6 +82,7 @@ export default class CurrentOrder extends LightningElement {
   loadNewOrderItem(id) {
     getOrderItemById({id: id})
     .then(result => {
+      console.log(result);
       this.orderItems.push(result);
     })
     .catch(error => {
@@ -163,6 +164,11 @@ export default class CurrentOrder extends LightningElement {
 
   handleMessage(message) {
     this.totalPrice =(+this.totalPrice + +message.orderItemPrice).toFixed(2);
+    this.displayedPrice = new Intl.NumberFormat(LOCALE, {
+      style: 'currency',
+      currency: CURRENCY,
+      currencyDisplay: 'symbol'
+    }).format(this.totalPrice);
     this.loadNewOrderItem(message.orderItemId);
   }
 
