@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Alcohol</masterLabel>
+        <translation>Алгоколь</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Baked dishes</masterLabel>
+        <translation>Запечёные блюда</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Beef</masterLabel>
+        <translation>Говядина</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Biscuits</masterLabel>
+        <translation>Бисквиты</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Boiled</masterLabel>
+        <translation>Вареное</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Bread</masterLabel>
+        <translation>Хлеб</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Canape</masterLabel>
+        <translation>Канапе</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Caviar</masterLabel>
+        <translation>Икра</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Cereal garnish</masterLabel>
+        <translation>Злаки</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Cheesecakes</masterLabel>
+        <translation>Чизкейки</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Chicken</masterLabel>
+        <translation>Курица</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Chocolate</masterLabel>
+        <translation>Шоколад</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Coffee</masterLabel>
+        <translation>Кофе</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Cold</masterLabel>
+        <translation>Холодные</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Cookie</masterLabel>
+        <translation>Печенье</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Fried</masterLabel>
+        <translation>Жареное</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Fried dishes</masterLabel>
+        <translation>Жареные блюда</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Hot</masterLabel>
+        <translation>Горячие</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Ice cream</masterLabel>
+        <translation>Мороженое</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Juice</masterLabel>
+        <translation>Сок</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Lungs</masterLabel>
+        <translation>Легкие</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Meaty</masterLabel>
+        <translation>Мясные</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Muffins</masterLabel>
+        <translation>Маффины</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Other</masterLabel>
+        <translation>Другое(ие)</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Paste</masterLabel>
+        <translation>Паста</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Pickles</masterLabel>
+        <translation>Соленья</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Pork</masterLabel>
+        <translation>Свинина</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>River fish</masterLabel>
+        <translation>Речная рыба</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Sandwiches</masterLabel>
+        <translation>Бутерброды</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Sea fish</masterLabel>
+        <translation>Морская рыба</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Seafood</masterLabel>
+        <translation>Морепродукты</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Sneeks</masterLabel>
+        <translation>Снеки</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Soup-cream</masterLabel>
+        <translation>Суп-крем</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Stewed</masterLabel>
+        <translation>Тушеное</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Stews dishes</masterLabel>
+        <translation>Тушеные блюда</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Tartlets</masterLabel>
+        <translation>Тарталетки</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Tea</masterLabel>
+        <translation>Чай</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Threads</masterLabel>
+        <translation>Нарезки</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Vegetable</masterLabel>
+        <translation>Овощные</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Vegetable garnish</masterLabel>
+        <translation>Овощные гарниры</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

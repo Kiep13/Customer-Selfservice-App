@@ -56,5 +56,13 @@
       <members>*</members>
       <name>CustomLabels</name>
     </types>
+    <types>
+        <members>*</members>
+        <name>GlobalValueSetTranslation</name>
+    </types>
+    <types>
+        <members>PicklistValueTranslation[]</members>
+        <name>CustomObjectTranslation</name>
+    </types>
     <version>49.0</version>
 </Package>

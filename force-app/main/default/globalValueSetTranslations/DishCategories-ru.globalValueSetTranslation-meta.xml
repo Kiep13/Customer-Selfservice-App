@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Bakery</masterLabel>
+        <translation>Хлебобулочные изделия</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Desserts</masterLabel>
+        <translation>Десерты</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Drinks</masterLabel>
+        <translation>Напитки</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Fish</masterLabel>
+        <translation>Рыба</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Garnishes</masterLabel>
+        <translation>Гарниры</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Main course</masterLabel>
+        <translation>Главное блюдо</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Meaty</masterLabel>
+        <translation>Мясное</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Salads</masterLabel>
+        <translation>Салаты</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Snacks</masterLabel>
+        <translation>Закуски</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Soups</masterLabel>
+        <translation>Супы</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Vegetable</masterLabel>
+        <translation>Овощи</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>
