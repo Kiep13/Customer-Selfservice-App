@@ -31,3 +31,7 @@ Clicking this button should open a popup with a list of previous orders and thei
 - When the user makes an order, an entry is automatically created with a list of selected dishes.
 - Components should be user friendly and look nice.
 - The app must be added to the Community.
+
+The app has a Russian localized version, and also indicates prices in accordance with the currency selected by the user.
+
+<img src="screenshot.png">
