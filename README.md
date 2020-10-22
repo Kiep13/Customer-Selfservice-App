@@ -34,4 +34,5 @@ Clicking this button should open a popup with a list of previous orders and thei
 
 The app has a Russian localized version, and also indicates prices in accordance with the currency selected by the user.
 
-<img src="screenshot.png">
+<img src="screenshot_ru.png">
+<img src="screenshot_en.png">
